@@ -1,0 +1,23 @@
+.inputGroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+.inputSearch {
+  border: none;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+  outline: none;
+}
+.btnInputSearch {
+  padding: 5px 20px;
+  background: #5e96fc;
+  border-radius: 8px;
+  border: none;
+  color: white;
+}
+.border {
+  border: 1px solid #5e96fc;
+}

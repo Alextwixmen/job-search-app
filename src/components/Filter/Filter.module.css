@@ -1,0 +1,42 @@
+.form {
+  padding: 20px 20px;
+  max-width: 315px;
+  background-color: white;
+  border: 1px solid #eaebed;
+}
+.formHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.formHeaderText {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  color: #232134;
+}
+.resetBtn {
+  outline: none;
+  border: 0;
+  background: transparent;
+  color: #acadb9;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.applyBtnText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
