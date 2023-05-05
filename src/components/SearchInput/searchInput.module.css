@@ -2,14 +2,19 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: white;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 16px;
 }
 .inputSearch {
   border: none;
   width: 100%;
-  padding: 10px 10px 10px 10px;
   outline: none;
+  box-sizing: border-box;
+  margin-left: 8px;
 }
 .btnInputSearch {
   padding: 5px 20px;
@@ -18,6 +23,6 @@
   border: none;
   color: white;
 }
-.border {
+.inputGroup:focus-within {
   border: 1px solid #5e96fc;
 }

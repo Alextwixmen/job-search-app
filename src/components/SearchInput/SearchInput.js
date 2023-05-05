@@ -1,15 +1,8 @@
-import { Button } from '@mantine/core';
 import styles from './searchInput.module.css';
-import { useState } from 'react';
 
 const SearchInput = () => {
-  const [border, changeBorder] = useState(null);
   return (
-    <div
-      className={`${styles.inputGroup} ${styles[border]}`}
-      onClick={() => changeBorder('border')}
-    >
-      <input className={styles.inputSearch}></input>
+    <div className={styles.inputGroup}>
       <svg
         width='15'
         height='15'
@@ -24,6 +17,11 @@ const SearchInput = () => {
           stroke-linecap='round'
         />
       </svg>
+      <input
+        className={styles.inputSearch}
+        placeholder='Введите название вакансии'
+      ></input>
+
       <button className={styles.btnInputSearch}>Поиск</button>
     </div>
   );

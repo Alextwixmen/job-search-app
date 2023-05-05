@@ -1,0 +1,45 @@
+.singlaVacancyContainer {
+  background-color: white;
+  padding: 25px;
+  border: 1px solid #eaebed;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+.vacancyName {
+  color: #5e96fc;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  padding-bottom: 12px;
+}
+.vacancyMainPart {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 15px;
+}
+.divider {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 21px;
+  text-align: center;
+  color: #7b7c88;
+}
+.salaryInfo {
+  color: #232134;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}

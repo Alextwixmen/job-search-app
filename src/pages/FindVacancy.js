@@ -1,11 +1,11 @@
 import styles from './pages.module.css';
 import Filter from '../components/Filter/Filter';
-import SearchInput from '../components/SearchInput/SearchInput';
+import SearchVacancy from '../components/SearchVacancy/SearchVacancy';
 const FindVacancy = () => {
   return (
     <div className={styles.container}>
       <Filter />
-      <SearchInput />
+      <SearchVacancy />
     </div>
   );
 };

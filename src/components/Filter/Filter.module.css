@@ -1,8 +1,9 @@
 .form {
   padding: 20px 20px;
-  max-width: 315px;
+  min-width: 315px;
   background-color: white;
   border: 1px solid #eaebed;
+  align-self: flex-start;
 }
 .formHeader {
   display: flex;
