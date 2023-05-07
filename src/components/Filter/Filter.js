@@ -1,6 +1,15 @@
 import { Select, Button } from '@mantine/core';
 import styles from './Filter.module.css';
+import { useEffect, useState } from 'react';
+import { NumberInput } from '@mantine/core';
+import IndustryService from '../../services/industryService';
 const Filter = () => {
+  const [industries, changeIndustries] = useState([
+    'React',
+    'Angular',
+    'Svelte',
+    'Vue',
+  ]);
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>
@@ -20,7 +29,7 @@ const Filter = () => {
               x2='4.44197'
               y2='11.7427'
               stroke='#ACADB9'
-              stroke-width='1.25'
+              strokeWidth={'1.25'}
             />
             <line
               x1='11.9013'
@@ -28,7 +37,7 @@ const Filter = () => {
               x2='4.60082'
               y2='4.44197'
               stroke='#ACADB9'
-              stroke-width='1.25'
+              strokeWidth='1.25'
             />
           </svg>
         </div>
@@ -47,40 +56,26 @@ const Filter = () => {
             <path
               d='M1 0.999999L7.21905 6.33061C7.66844 6.7158 8.33156 6.7158 8.78095 6.33061L15 1'
               stroke='#ACADB9'
-              stroke-width='1.5'
-              stroke-linecap='round'
+              strokeWidth='1.5'
+              strokeLinecap='round'
             />
           </svg>
         }
         rightSectionWidth={30}
         styles={{ rightSection: { pointerEvents: 'none' } }}
-        data={['React', 'Angular', 'Svelte', 'Vue']}
+        data={industries}
         mb={20}
       />
-      <Select
-        clearable
+      <NumberInput
         label='Оклад'
         placeholder='От'
-        data={[
-          { value: '100', label: '100' },
-          { value: '200', label: '200' },
-          { value: '300', label: '300' },
-          { value: '400', label: '400' },
-        ]}
+        max={500000}
+        min={0}
         mb={8}
+        step={1000}
       />
-      <Select
-        searchable
-        clearable
-        placeholder='До'
-        data={[
-          { value: '500', label: '500' },
-          { value: '1000', label: '1000' },
-          { value: '2000', label: '2000' },
-          { value: '3000', label: '3000' },
-        ]}
-        mb={20}
-      />
+      <NumberInput placeholder='До' max={500000} min={0} mb={20} step={1000} />
+
       <Button w={'100%'} c={'white'}>
         <span className={styles.applyBtnText}>Применить</span>
       </Button>

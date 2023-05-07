@@ -43,3 +43,8 @@
   align-items: center;
   gap: 11px;
 }
+.vacancyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

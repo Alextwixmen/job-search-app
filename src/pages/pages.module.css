@@ -4,3 +4,9 @@
   display: flex;
   gap: 28px;
 }
+.findVacancyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
