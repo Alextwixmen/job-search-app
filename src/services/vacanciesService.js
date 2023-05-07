@@ -1,12 +1,14 @@
 export default class VacanciesService {
-  static getVacancies = async (value) => {
+  static getVacancies = async (options) => {
     let keyWord = '';
-    if (value !== undefined) {
-      keyWord = value;
+    if (options?.vacancyName !== undefined) {
+      keyWord = options.vacancyName;
     }
+    let paymentFrom = 20000;
+    let paymentTo = 60000;
     try {
       const response = await fetch(
-        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&keyword=${keyWord}`,
+        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&keyword=${keyWord}&payment_from=${paymentFrom}`,
         {
           headers: {
             Host: 'api.superjob.ru',

@@ -18,8 +18,8 @@ const SearchVacancy = () => {
   const [inputValue, changeInputValue] = useState();
   const handleChange = (e) => {
     changeInputValue(e.target.value);
-    VacanciesService.getVacancies(e.target.value).then((data) =>
-      handleSearch(data)
+    VacanciesService.getVacancies({ vacancyName: e.target.value }).then(
+      (data) => handleSearch(data)
     );
   };
 
