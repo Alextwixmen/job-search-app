@@ -4,12 +4,17 @@ import { useEffect, useState } from 'react';
 import { NumberInput } from '@mantine/core';
 import IndustryService from '../../services/industryService';
 const Filter = () => {
-  const [industries, changeIndustries] = useState([
-    'React',
-    'Angular',
-    'Svelte',
-    'Vue',
-  ]);
+  const [industries, changeIndustries] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await IndustryService.getIndustries();
+      const namesOfIndustries = response.reduce((acc, nameOfIndustry) => {
+        return [...acc, nameOfIndustry.title];
+      }, []);
+      changeIndustries(namesOfIndustries);
+    }
+    fetchData();
+  }, []);
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>
