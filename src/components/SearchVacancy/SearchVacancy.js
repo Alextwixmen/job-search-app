@@ -6,11 +6,6 @@ import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
 
 const SearchVacancy = (props) => {
-  // const [vacancies, changeVacancies] = useState();
-  // useEffect(() => {
-  //   VacanciesService.getVacancies().then((data) => changeVacancies(data));
-  // }, []);
-
   const [searchVacancies, handleSearch] = useState();
   const onSubmit = () => {
     props.changeVacancies(searchVacancies);

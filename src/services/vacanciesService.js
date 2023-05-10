@@ -22,7 +22,6 @@ export default class VacanciesService {
         }
       );
       const vacancies = await response.json();
-      console.log(vacancies.objects);
       return vacancies.objects;
     } catch (error) {
       throw error;
