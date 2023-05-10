@@ -3,23 +3,39 @@ import styles from './Filter.module.css';
 import { useEffect, useState } from 'react';
 import { NumberInput } from '@mantine/core';
 import IndustryService from '../../services/industryService';
-const Filter = () => {
+import VacanciesService from '../../services/vacanciesService';
+
+const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
+  const [industryVocabluary] = useState({});
+
   useEffect(() => {
     async function fetchData() {
       const response = await IndustryService.getIndustries();
-      const namesOfIndustries = response.reduce((acc, nameOfIndustry) => {
-        return [...acc, nameOfIndustry.title];
+      const namesOfIndustries = response.reduce((acc, industry) => {
+        industryVocabluary[industry.key] = industry.title;
+        return [...acc, industry.title];
       }, []);
+
       changeIndustries(namesOfIndustries);
     }
     fetchData();
   }, []);
+
+  const [filterInfo, changeFilterInfo] = useState({});
+
+  const handleResetButton = (e) => {
+    e.preventDefault();
+    changeFilterInfo({});
+  };
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>
         <span className={styles.formHeaderText}>Фильтры</span>
-        <div className={styles.btnContainer}>
+        <div
+          className={styles.btnContainer}
+          onClick={(e) => handleResetButton(e)}
+        >
           <button className={styles.resetBtn}>Сбросить все </button>
           <svg
             width='16'
@@ -49,7 +65,7 @@ const Filter = () => {
       </div>
       <Select
         label='Отрасль'
-        placeholder='Выберите область'
+        placeholder='Выберите отрасль'
         rightSection={
           <svg
             width='16'
@@ -70,6 +86,10 @@ const Filter = () => {
         styles={{ rightSection: { pointerEvents: 'none' } }}
         data={industries}
         mb={20}
+        onChange={(e) =>
+          changeFilterInfo({ ...filterInfo, industry: industryVocabluary[e] })
+        }
+        value={industryVocabluary[filterInfo.industry] || ''}
       />
       <NumberInput
         label='Оклад'
@@ -78,10 +98,24 @@ const Filter = () => {
         min={0}
         mb={8}
         step={1000}
+        onChange={(e) => changeFilterInfo({ ...filterInfo, payment_from: e })}
+        value={filterInfo.payment_from || ''}
       />
-      <NumberInput placeholder='До' max={500000} min={0} mb={20} step={1000} />
+      <NumberInput
+        placeholder='До'
+        max={500000}
+        min={0}
+        mb={20}
+        step={1000}
+        onChange={(e) => changeFilterInfo({ ...filterInfo, payment_to: e })}
+        value={filterInfo.payment_to || ''}
+      />
 
-      <Button w={'100%'} c={'white'}>
+      <Button
+        w={'100%'}
+        c={'white'}
+        onClick={() => props.handleFilter(filterInfo)}
+      >
         <span className={styles.applyBtnText}>Применить</span>
       </Button>
     </form>

@@ -4,11 +4,10 @@ export default class VacanciesService {
     if (options?.vacancyName !== undefined) {
       keyWord = options.vacancyName;
     }
-    let paymentFrom = 20000;
-    let paymentTo = 60000;
+    console.log(options);
     try {
       const response = await fetch(
-        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&keyword=${keyWord}&payment_from=${paymentFrom}`,
+        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&keyword=${keyWord}&catalogues=${options?.industry}&payment_from=${options?.payment_from}&payment_to=${options?.payment_to}`,
         {
           headers: {
             Host: 'api.superjob.ru',
@@ -23,6 +22,7 @@ export default class VacanciesService {
         }
       );
       const vacancies = await response.json();
+      console.log(vacancies.objects);
       return vacancies.objects;
     } catch (error) {
       throw error;

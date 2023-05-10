@@ -5,15 +5,15 @@ import { useEffect, useState } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
 
-const SearchVacancy = () => {
-  const [vacancies, changeVacancies] = useState();
-  useEffect(() => {
-    VacanciesService.getVacancies().then((data) => changeVacancies(data));
-  }, []);
+const SearchVacancy = (props) => {
+  // const [vacancies, changeVacancies] = useState();
+  // useEffect(() => {
+  //   VacanciesService.getVacancies().then((data) => changeVacancies(data));
+  // }, []);
 
   const [searchVacancies, handleSearch] = useState();
   const onSubmit = () => {
-    changeVacancies(searchVacancies);
+    props.changeVacancies(searchVacancies);
   };
   const [inputValue, changeInputValue] = useState();
   const handleChange = (e) => {
@@ -23,7 +23,7 @@ const SearchVacancy = () => {
     );
   };
 
-  if (!vacancies)
+  if (!props.vacancies)
     return (
       <div className={styles.searchVacancyContainer}>
         <SearchInput
@@ -41,7 +41,7 @@ const SearchVacancy = () => {
         value={inputValue}
         onSubmit={onSubmit}
       />
-      {vacancies.map((elem) => {
+      {props.vacancies.map((elem) => {
         return <SingleVacancy vacancyInfo={elem} />;
       })}
     </div>

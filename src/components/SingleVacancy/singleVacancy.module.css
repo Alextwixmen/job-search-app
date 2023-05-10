@@ -48,3 +48,19 @@
   align-items: center;
   justify-content: space-between;
 }
+.favoriteStar {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.star:hover * {
+  stroke: #5e96fc;
+}
+.star:active {
+  fill: #5e96fc;
+}
+.favoriteStarIcon * {
+  stroke: #5e96fc;
+  fill: #5e96fc;
+}
