@@ -9,6 +9,7 @@ const FindVacancy = () => {
   const [vacancies, changeVacancies] = useState();
   const [isLoading, setLoading] = useState(true);
   const [filterInfo, setFilterInfo] = useState();
+
   useEffect(() => {
     let response = VacanciesService.getVacancies();
     setLoading(true);
@@ -36,7 +37,6 @@ const FindVacancy = () => {
   const changeFilterInfo = (info) => {
     console.log('info', info);
     setFilterInfo(info);
-    // console.log('filterInfo', filterInfo);
   };
   return (
     <div className={styles.container}>

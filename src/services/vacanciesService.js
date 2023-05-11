@@ -1,13 +1,20 @@
 export default class VacanciesService {
   static getVacancies = async (options) => {
-    let keyWord = '';
-    if (options?.vacancyName !== undefined) {
-      keyWord = options.vacancyName;
-    }
-    // console.log('options', options);
+    // let keyWord = '';
+    // if (options?.vacancyName !== undefined) {
+    //   keyWord = options.vacancyName;
+    // }
+    const page = options?.page !== undefined ? options.page : '';
+    const keyWord =
+      options?.vacancyName !== undefined ? options.vacancyName : '';
+    const industry = options?.industry !== undefined ? options.industry : '';
+    const payment_from =
+      options?.payment_from !== undefined ? options.payment_from : '';
+    const payment_to =
+      options?.payment_to !== undefined ? options?.payment_to : '';
     try {
       const response = await fetch(
-        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${options?.page}&keyword=${keyWord}&catalogues=${options?.industry}&payment_from=${options?.payment_from}&payment_to=${options?.payment_to}`,
+        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}`,
         {
           headers: {
             Host: 'api.superjob.ru',
