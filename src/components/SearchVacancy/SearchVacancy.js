@@ -4,6 +4,7 @@ import styles from './searchVacancy.module.css';
 import { useEffect, useState } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
+import { Paginate } from '../Pagination/Paginate';
 
 const SearchVacancy = (props) => {
   const [searchVacancies, handleSearch] = useState();
@@ -17,6 +18,7 @@ const SearchVacancy = (props) => {
       (data) => handleSearch(data)
     );
   };
+  // console.log(props.vacancies);
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput
@@ -36,6 +38,7 @@ const SearchVacancy = (props) => {
       {props.vacancies.map((elem) => {
         return <SingleVacancy vacancyInfo={elem} key={elem.id} />;
       })}
+      <Paginate total={125} handlePagination={props.handlePagination} />
     </div>
   );
 };

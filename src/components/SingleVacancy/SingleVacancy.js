@@ -59,7 +59,7 @@ const SingleVacancy = (props) => {
         </div>
         <div className={styles.vacancyMainPart}>
           <div className={styles.salaryInfo}>
-            з/п от {props.vacancyInfo.payment_from} rub
+            з/п от {props.vacancyInfo.payment_from} {props.vacancyInfo.currency}
           </div>
           <div className={styles.divider}>.</div>
           <div>

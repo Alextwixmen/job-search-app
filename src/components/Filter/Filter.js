@@ -28,7 +28,6 @@ const Filter = (props) => {
     e.preventDefault();
     changeFilterInfo({});
   };
-
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>
@@ -63,7 +62,9 @@ const Filter = (props) => {
         rightSectionWidth={30}
         data={industries}
         mb={20}
-        onChange={(e) => changeFilterInfo({ ...filterInfo, industry: e })}
+        onChange={(e) => {
+          changeFilterInfo({ ...filterInfo, industry: e });
+        }}
         value={filterInfo.industry || ''}
       />
       <NumberInput
