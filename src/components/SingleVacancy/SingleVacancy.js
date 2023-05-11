@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const SingleVacancy = (props) => {
   const [isFavoriteStar, setFavoriteStar] = useState(false);
-  const handleStartClick = (vacancyInfo) => {
+  const handleStarClick = (vacancyInfo) => {
     setFavoriteStar(true);
     const shortVacancyInfo = {
       typeOfWork: vacancyInfo.type_of_work.title,
@@ -15,6 +15,7 @@ const SingleVacancy = (props) => {
       profession: vacancyInfo.profession,
       payment_from: vacancyInfo.payment_from,
       key: props.vacancyInfo.id,
+      vacancyRichText: vacancyInfo.vacancyRichText,
     };
     LocalStorageService.setItem(shortVacancyInfo);
   };
@@ -27,7 +28,7 @@ const SingleVacancy = (props) => {
   const handleClick =
     props.handleDeleteVacancy !== undefined
       ? props.handleDeleteVacancy
-      : handleStartClick;
+      : handleStarClick;
 
   const favoriteStar =
     props.favoriteStar ||
@@ -35,8 +36,15 @@ const SingleVacancy = (props) => {
     isFavoriteStar
       ? 'favoriteStarIcon'
       : null;
+  const vacancyId = props.vacancyInfo.id
+    ? props.vacancyInfo.id
+    : props.vacancyInfo.key;
   return (
-    <Link to={'/vacancy/123123'} onClick={(e) => handlePrevent(e)}>
+    <Link
+      to={`/vacancy/${vacancyId}`}
+      onClick={(e) => handlePrevent(e)}
+      state={{ from: props.vacancyInfo }}
+    >
       <div className={styles.singlaVacancyContainer}>
         <div className={styles.vacancyHeader}>
           <div className={styles.vacancyName}>

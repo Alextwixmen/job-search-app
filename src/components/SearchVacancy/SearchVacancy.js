@@ -18,7 +18,7 @@ const SearchVacancy = (props) => {
     );
   };
   return props.isLoading ? (
-    <div className={styles.searchVacancyContainer}>
+    <div className={styles.spinnerContainer}>
       <SearchInput
         handleCnahge={handleChange}
         value={inputValue}
@@ -34,7 +34,7 @@ const SearchVacancy = (props) => {
         onSubmit={onSubmit}
       />
       {props.vacancies.map((elem) => {
-        return <SingleVacancy vacancyInfo={elem} />;
+        return <SingleVacancy vacancyInfo={elem} key={elem.id} />;
       })}
     </div>
   );

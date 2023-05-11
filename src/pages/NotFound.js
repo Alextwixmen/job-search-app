@@ -1,10 +1,11 @@
 import styles from './pages.module.css';
 import { ReactComponent as NotFoundPic } from '../assets/images/notFoundPicture.svg';
 import { Button } from '@mantine/core';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 const NotFound = () => {
+  let navigate = useNavigate();
   const handleClick = () => {
-    return <Navigate to='/vacancy' />;
+    navigate('/vacancy');
   };
   return (
     <div className={styles.notFoundContainer}>

@@ -29,6 +29,12 @@
   line-height: 20px;
   cursor: pointer;
 }
+.resetBtn:hover {
+  color: #92c1ff;
+}
+.resetBtn:active {
+  color: #5e96fc;
+}
 .btnContainer {
   display: flex;
   align-items: center;
@@ -41,4 +47,12 @@
   font-size: 14px;
   line-height: 21px;
   text-align: center;
+}
+.closeIcon:hover * {
+  stroke: #92c1ff;
+  fill: #92c1ff;
+}
+.closeIcon:active * {
+  stroke: #5e96fc;
+  fill: #5e96fc;
 }

@@ -6,11 +6,12 @@ import { useMatches } from 'react-router-dom';
 const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
+  const notFoundRoute = useMatch('/notFound');
   let findVacancyStyle = null;
   let favoritesStyle = null;
   if (findVacancyRoute) {
     findVacancyStyle = 'activeLink';
-  } else if (favoritesRoute) {
+  } else if (favoritesRoute || notFoundRoute) {
     favoritesStyle = 'activeLink';
   }
   return (

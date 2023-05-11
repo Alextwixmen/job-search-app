@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { NumberInput } from '@mantine/core';
 import IndustryService from '../../services/industryService';
 import VacanciesService from '../../services/vacanciesService';
-
+import { ReactComponent as CloseIcon } from '../../assets/icons/CloseIcon.svg';
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
   const [industryVocabluary] = useState({});
@@ -38,30 +38,7 @@ const Filter = (props) => {
           onClick={(e) => handleResetButton(e)}
         >
           <button className={styles.resetBtn}>Сбросить все </button>
-          <svg
-            width='16'
-            height='16'
-            viewBox='0 0 16 16'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <line
-              x1='11.7425'
-              y1='4.44219'
-              x2='4.44197'
-              y2='11.7427'
-              stroke='#ACADB9'
-              strokeWidth={'1.25'}
-            />
-            <line
-              x1='11.9013'
-              y1='11.7425'
-              x2='4.60082'
-              y2='4.44197'
-              stroke='#ACADB9'
-              strokeWidth='1.25'
-            />
-          </svg>
+          <CloseIcon className={styles.closeIcon} />
         </div>
       </div>
       <Select
@@ -84,7 +61,6 @@ const Filter = (props) => {
           </svg>
         }
         rightSectionWidth={30}
-        styles={{ rightSection: { pointerEvents: 'none' } }}
         data={industries}
         mb={20}
         onChange={(e) => changeFilterInfo({ ...filterInfo, industry: e })}

@@ -15,7 +15,7 @@ const Favorites = () => {
     );
     LocalStorageService.deleteItem(vacancyInfo.key);
   };
-  if (localStorage.length === 0) {
+  if (!localStorage.length) {
     return <Navigate to='/notFound' />;
   }
   return (
@@ -26,6 +26,7 @@ const Favorites = () => {
             vacancyInfo={vacancy}
             handleDeleteVacancy={handleDeleteVacancy}
             favoriteStar={true}
+            key={vacancy.key}
           />
         );
       })}

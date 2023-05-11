@@ -5,7 +5,7 @@ import Favorites from './pages/Favorites';
 import FindVacancy from './pages/FindVacancy';
 import Layout from './components/Layout/Layout';
 import AuthService from './services/authService';
-import SingleVacancy from './pages/SingleVacancy';
+import SingleVacancy from './pages/SingleVacancy/SingleVacancy';
 import NotFound from './pages/NotFound';
 // AuthService.auth();
 

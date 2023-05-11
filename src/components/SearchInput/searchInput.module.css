@@ -30,3 +30,6 @@
 .inputGroup:focus-within {
   outline: 1px solid #5e96fc;
 }
+.inputGroup:hover {
+  outline: 1px solid #5e96fc;
+}
