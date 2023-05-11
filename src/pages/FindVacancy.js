@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import VacanciesService from '../services/vacanciesService';
 const FindVacancy = () => {
   const [vacancies, changeVacancies] = useState();
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     let response = VacanciesService.getVacancies();
     setLoading(true);

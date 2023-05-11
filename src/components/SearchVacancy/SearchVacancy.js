@@ -17,19 +17,16 @@ const SearchVacancy = (props) => {
       (data) => handleSearch(data)
     );
   };
-  console.log(props.isLoading);
-  if (!props.vacancies)
-    return (
-      <div className={styles.searchVacancyContainer}>
-        <SearchInput
-          handleCnahge={handleChange}
-          value={inputValue}
-          onSubmit={onSubmit}
-        />
-        <Loader />
-      </div>
-    );
-  return (
+  return props.isLoading ? (
+    <div className={styles.searchVacancyContainer}>
+      <SearchInput
+        handleCnahge={handleChange}
+        value={inputValue}
+        onSubmit={onSubmit}
+      />
+      <Loader />
+    </div>
+  ) : (
     <div className={styles.searchVacancyContainer}>
       <SearchInput
         handleCnahge={handleChange}

@@ -1,13 +1,12 @@
 import React from 'react';
-import { Button } from '@mantine/core';
 import styles from './app.module.css';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Favorites from './pages/Favorites';
 import FindVacancy from './pages/FindVacancy';
 import Layout from './components/Layout/Layout';
 import AuthService from './services/authService';
 import SingleVacancy from './pages/SingleVacancy';
-import { useEffect } from 'react';
+import NotFound from './pages/NotFound';
 // AuthService.auth();
 
 function App() {
@@ -17,6 +16,7 @@ function App() {
         <Route path='/vacancy' element={<FindVacancy />} />
         <Route path='favorites' element={<Favorites />} />
         <Route path='/vacancy/:id' element={<SingleVacancy />} />
+        <Route path='/notFound' element={<NotFound />} />
       </Route>
     </Routes>
   );
