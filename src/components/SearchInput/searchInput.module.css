@@ -28,5 +28,5 @@
   opacity: 0.7;
 }
 .inputGroup:focus-within {
-  border: 1px solid #5e96fc;
+  outline: 1px solid #5e96fc;
 }

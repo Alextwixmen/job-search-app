@@ -13,7 +13,7 @@ const Filter = (props) => {
     async function fetchData() {
       const response = await IndustryService.getIndustries();
       const namesOfIndustries = response.reduce((acc, industry) => {
-        industryVocabluary[industry.key] = industry.title;
+        industryVocabluary[industry.title] = industry.key;
         return [...acc, industry.title];
       }, []);
 
@@ -28,6 +28,7 @@ const Filter = (props) => {
     e.preventDefault();
     changeFilterInfo({});
   };
+
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>
@@ -86,10 +87,8 @@ const Filter = (props) => {
         styles={{ rightSection: { pointerEvents: 'none' } }}
         data={industries}
         mb={20}
-        onChange={(e) =>
-          changeFilterInfo({ ...filterInfo, industry: industryVocabluary[e] })
-        }
-        value={industryVocabluary[filterInfo.industry] || ''}
+        onChange={(e) => changeFilterInfo({ ...filterInfo, industry: e })}
+        value={filterInfo.industry || ''}
       />
       <NumberInput
         label='Оклад'
@@ -114,7 +113,12 @@ const Filter = (props) => {
       <Button
         w={'100%'}
         c={'white'}
-        onClick={() => props.handleFilter(filterInfo)}
+        onClick={() =>
+          props.handleFilter({
+            ...filterInfo,
+            industry: industryVocabluary[filterInfo.industry],
+          })
+        }
       >
         <span className={styles.applyBtnText}>Применить</span>
       </Button>

@@ -5,18 +5,31 @@ import { useState, useEffect } from 'react';
 import VacanciesService from '../services/vacanciesService';
 const FindVacancy = () => {
   const [vacancies, changeVacancies] = useState();
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
-    VacanciesService.getVacancies().then((data) => changeVacancies(data));
+    let response = VacanciesService.getVacancies();
+    setLoading(true);
+    response.then((data) => {
+      changeVacancies(data);
+      setLoading(false);
+    });
   }, []);
   const handleFilter = (filterInfo) => {
-    console.log('handleFilter');
     const filteredVacancies = VacanciesService.getVacancies(filterInfo);
-    filteredVacancies.then((vacancy) => changeVacancies(vacancy));
+    setLoading(true);
+    filteredVacancies.then((vacancy) => {
+      changeVacancies(vacancy);
+      setLoading(false);
+    });
   };
   return (
     <div className={styles.container}>
       <Filter handleFilter={handleFilter} />
-      <SearchVacancy vacancies={vacancies} changeVacancies={changeVacancies} />
+      <SearchVacancy
+        vacancies={vacancies}
+        changeVacancies={changeVacancies}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
