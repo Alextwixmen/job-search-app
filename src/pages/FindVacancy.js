@@ -10,6 +10,7 @@ const FindVacancy = () => {
   const [isLoading, setLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState();
   const [inputValue, setValue] = useState('');
+  const [totalPages, setTotal] = useState(0);
   useEffect(() => {
     let response = VacanciesService.getVacancies();
     setLoading(true);
@@ -32,10 +33,12 @@ const FindVacancy = () => {
   };
 
   const handlePagination = (e) => {
+    console.log('filterOptions', filterOptions);
     const vacancies = VacanciesService.getVacancies({
       ...filterOptions,
       page: e,
       count: '',
+      vacancyName: inputValue,
     });
     setLoading(true);
     vacancies.then((vacancies) => {
@@ -46,6 +49,15 @@ const FindVacancy = () => {
   const handleFilterOptions = (info) => {
     setFilterOptions(info);
   };
+  useEffect(() => {
+    if (VacanciesService.total > 500) {
+      setTotal(125);
+    } else if (VacanciesService.total === 0) {
+      setTotal(1);
+    } else {
+      setTotal(Math.floor(VacanciesService.total / 4));
+    }
+  }, [VacanciesService.total]);
   return (
     <div className={styles.container}>
       <Filter
@@ -61,7 +73,7 @@ const FindVacancy = () => {
           setValue={setValue}
           filterOptions={filterOptions}
         />
-        <Paginate total={125} handlePagination={handlePagination} />
+        <Paginate total={totalPages} handlePagination={handlePagination} />
       </div>
     </div>
   );

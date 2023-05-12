@@ -29,7 +29,10 @@ const Filter = (props) => {
   const [filterInfo, changeFilterInfo] = useState({});
 
   useEffect(() => {
-    props.handleFilterOptions(filterInfo);
+    props.handleFilterOptions({
+      ...filterInfo,
+      industry: industryVocabluary[filterInfo.industry],
+    });
   }, [filterInfo]);
 
   const handleResetButton = (e) => {

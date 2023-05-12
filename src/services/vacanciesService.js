@@ -1,9 +1,6 @@
 export default class VacanciesService {
+  static total = null;
   static getVacancies = async (options) => {
-    // let keyWord = '';
-    // if (options?.vacancyName !== undefined) {
-    //   keyWord = options.vacancyName;
-    // }
     const page = options?.page !== undefined ? options.page : '';
     const keyWord =
       options?.vacancyName !== undefined ? options.vacancyName : '';
@@ -32,6 +29,8 @@ export default class VacanciesService {
         }
       );
       const vacancies = await response.json();
+      this.total = vacancies.total;
+      // console.log('vacancies.total', vacancies.total);
       return vacancies.objects;
     } catch (error) {
       throw error;
