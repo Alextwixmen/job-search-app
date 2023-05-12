@@ -10,11 +10,11 @@ export default class VacanciesService {
     const payment_to =
       options?.payment_to !== undefined ? options?.payment_to : '';
     console.log(
-      `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}`
+      `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1`
     );
     try {
       const response = await fetch(
-        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}`,
+        `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1`,
         {
           headers: {
             Host: 'api.superjob.ru',
@@ -30,6 +30,7 @@ export default class VacanciesService {
       );
       const vacancies = await response.json();
       this.total = vacancies.total;
+      console.log(vacancies.objects);
       // console.log('vacancies.total', vacancies.total);
       return vacancies.objects;
     } catch (error) {
