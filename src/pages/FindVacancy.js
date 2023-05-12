@@ -8,8 +8,8 @@ import { Paginate } from '../components/Pagination/Paginate';
 const FindVacancy = () => {
   const [vacancies, changeVacancies] = useState();
   const [isLoading, setLoading] = useState(true);
-  const [filterInfo, setFilterInfo] = useState();
-
+  const [filterOptions, setFilterOptions] = useState();
+  const [inputValue, setValue] = useState('');
   useEffect(() => {
     let response = VacanciesService.getVacancies();
     setLoading(true);
@@ -20,7 +20,10 @@ const FindVacancy = () => {
   }, []);
 
   const handleFilter = (filterInfo) => {
-    const filteredVacancies = VacanciesService.getVacancies(filterInfo);
+    const filteredVacancies = VacanciesService.getVacancies({
+      vacancyName: inputValue,
+      ...filterInfo,
+    });
     setLoading(true);
     filteredVacancies.then((vacancy) => {
       changeVacancies(vacancy);
@@ -29,24 +32,37 @@ const FindVacancy = () => {
   };
 
   const handlePagination = (e) => {
-    const vacancies = VacanciesService.getVacancies({ page: e });
+    const vacancies = VacanciesService.getVacancies({
+      ...filterOptions,
+      page: e,
+      count: '',
+    });
+    setLoading(true);
     vacancies.then((vacancies) => {
       changeVacancies(vacancies);
+      setLoading(false);
     });
   };
-  const changeFilterInfo = (info) => {
-    console.log('info', info);
-    setFilterInfo(info);
+  const handleFilterOptions = (info) => {
+    setFilterOptions(info);
   };
   return (
     <div className={styles.container}>
-      <Filter handleFilter={handleFilter} changeFilterInfo={changeFilterInfo} />
-      <SearchVacancy
-        vacancies={vacancies}
-        changeVacancies={changeVacancies}
-        isLoading={isLoading}
-        handlePagination={handlePagination}
+      <Filter
+        handleFilter={handleFilter}
+        handleFilterOptions={handleFilterOptions}
       />
+      <div className={styles.innerContainer}>
+        <SearchVacancy
+          vacancies={vacancies}
+          changeVacancies={changeVacancies}
+          isLoading={isLoading}
+          handlePagination={handlePagination}
+          setValue={setValue}
+          filterOptions={filterOptions}
+        />
+        <Paginate total={125} handlePagination={handlePagination} />
+      </div>
     </div>
   );
 };

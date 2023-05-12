@@ -12,17 +12,26 @@ const NotFound = () => {
       <div className={styles.notFoundItems}>
         <NotFoundPic className={styles.notFoundPic} />
         <span className={styles.notFoundText}>Упс, здесь еще ничего нет!</span>
-        <Button
+        <button onClick={handleClick} className={styles.vacancySearch}>
+          Поиск Вакансий
+        </button>
+        {/* <Button
           variant='light'
           radius={8}
           pt={10}
           pb={10}
           pl={24}
           pr={24}
-          onClick={handleClick}
+          style={{
+            fontSize: '14px',
+            color: '#3B7CD3',
+            fontFamily: 'Open Sans',
+            fontWeight: 600,
+          }}
         >
-          <span className={styles.btnText}>Поиск Вакансий</span>
-        </Button>
+          Поиск Вакансий
+          {/* <span className={styles.btnText}>Поиск Вакансий</span> */}
+        {/* </Button> */}
       </div>
     </div>
   );

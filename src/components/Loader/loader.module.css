@@ -6,6 +6,8 @@
   height: 80px;
   animation: spin 2s linear infinite;
 }
+.containerLoader {
+}
 
 @keyframes spin {
   0% {

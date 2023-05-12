@@ -11,18 +11,26 @@ const SearchVacancy = (props) => {
   const onSubmit = () => {
     props.changeVacancies(searchVacancies);
   };
-  const [inputValue, changeInputValue] = useState();
-  const handleChange = (e) => {
+  const [inputValue, changeInputValue] = useState('');
+
+  useEffect(() => {
+    VacanciesService.getVacancies({
+      vacancyName: inputValue,
+      ...props.filterOptions,
+      industry: '',
+    }).then((data) => handleSearch(data));
+  }, [inputValue]);
+
+  const handleChahge = (e) => {
+    props.setValue(e.target.value);
     changeInputValue(e.target.value);
-    VacanciesService.getVacancies({ vacancyName: e.target.value }).then(
-      (data) => handleSearch(data)
-    );
   };
+
   // console.log(props.vacancies);
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput
-        handleCnahge={handleChange}
+        handleChange={handleChahge}
         value={inputValue}
         onSubmit={onSubmit}
       />
@@ -31,14 +39,15 @@ const SearchVacancy = (props) => {
   ) : (
     <div className={styles.searchVacancyContainer}>
       <SearchInput
-        handleCnahge={handleChange}
+        handleChange={handleChahge}
         value={inputValue}
         onSubmit={onSubmit}
       />
-      {props.vacancies.map((elem) => {
-        return <SingleVacancy vacancyInfo={elem} key={elem.id} />;
-      })}
-      <Paginate total={125} handlePagination={props.handlePagination} />
+      <div className={styles.singleVacancyContainer}>
+        {props.vacancies.map((elem) => {
+          return <SingleVacancy vacancyInfo={elem} key={elem.id} />;
+        })}
+      </div>
     </div>
   );
 };

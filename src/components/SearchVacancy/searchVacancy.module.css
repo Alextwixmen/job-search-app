@@ -4,7 +4,13 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  gap: 250px;
 }
 .searchVacancyContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.singleVacancyContainer {
+  /* min-height: 735px; */
 }

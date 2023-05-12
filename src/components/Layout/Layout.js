@@ -3,10 +3,13 @@ import styles from './Layout.module.css';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import { useMatch } from 'react-router-dom';
 import { useMatches } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
   const notFoundRoute = useMatch('/notFound');
+  const navigate = useNavigate();
   let findVacancyStyle = null;
   let favoritesStyle = null;
   if (findVacancyRoute) {
@@ -14,6 +17,10 @@ const Layout = () => {
   } else if (favoritesRoute || notFoundRoute) {
     favoritesStyle = 'activeLink';
   }
+  useEffect(() => {
+    navigate('/vacancy');
+  }, []);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>

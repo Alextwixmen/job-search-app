@@ -5,10 +5,14 @@ import { NumberInput } from '@mantine/core';
 import IndustryService from '../../services/industryService';
 import VacanciesService from '../../services/vacanciesService';
 import { ReactComponent as CloseIcon } from '../../assets/icons/CloseIcon.svg';
+import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
+import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
+import { ReactComponent as UpBtnNumberInput } from '../../assets/icons/UpBtnNumberInput.svg';
+import { useHover } from '@mantine/hooks';
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
   const [industryVocabluary] = useState({});
-
+  const [isOpen, setOpen] = useState(false);
   useEffect(() => {
     async function fetchData() {
       const response = await IndustryService.getIndustries();
@@ -23,6 +27,10 @@ const Filter = (props) => {
   }, []);
 
   const [filterInfo, changeFilterInfo] = useState({});
+
+  useEffect(() => {
+    props.handleFilterOptions(filterInfo);
+  }, [filterInfo]);
 
   const handleResetButton = (e) => {
     e.preventDefault();
@@ -41,24 +49,22 @@ const Filter = (props) => {
         </div>
       </div>
       <Select
+        styles={(theme) => ({
+          item: {
+            '&[data-selected]': {
+              '&, &:hover': {
+                backgroundColor: '#5E96FC',
+              },
+            },
+            '&[data-hovered]': {
+              backgroundColor: '#DEECFF',
+            },
+          },
+          rightSection: { pointerEvents: 'none' },
+        })}
         label='Отрасль'
         placeholder='Выберите отрасль'
-        rightSection={
-          <svg
-            width='16'
-            height='8'
-            viewBox='0 0 16 8'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M1 0.999999L7.21905 6.33061C7.66844 6.7158 8.33156 6.7158 8.78095 6.33061L15 1'
-              stroke='#ACADB9'
-              strokeWidth='1.5'
-              strokeLinecap='round'
-            />
-          </svg>
-        }
+        rightSection={isOpen ? <UpBtn /> : <DownBtn />}
         rightSectionWidth={30}
         data={industries}
         mb={20}
@@ -66,6 +72,8 @@ const Filter = (props) => {
           changeFilterInfo({ ...filterInfo, industry: e });
         }}
         value={filterInfo.industry || ''}
+        onDropdownClose={() => setOpen(false)}
+        onDropdownOpen={() => setOpen(true)}
       />
       <NumberInput
         label='Оклад'
@@ -76,6 +84,7 @@ const Filter = (props) => {
         step={1000}
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_from: e })}
         value={filterInfo.payment_from || ''}
+        radius={8}
       />
       <NumberInput
         placeholder='До'
@@ -85,6 +94,7 @@ const Filter = (props) => {
         step={1000}
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_to: e })}
         value={filterInfo.payment_to || ''}
+        radius={8}
       />
 
       <Button

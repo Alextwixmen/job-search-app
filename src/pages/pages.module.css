@@ -55,3 +55,30 @@
   padding: 10px 24px;
   border-radius: 8px;
 }
+.vacancySearch {
+  border: none;
+  outline: none;
+  padding: 10px 24px 10px 24px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 155%;
+  color: #3b7cd3;
+  background-color: #deecff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.vacancySearch:hover {
+  color: white;
+  background-color: #3b7cd3;
+}
+.innerContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  /* gap: 104px; */
+  min-height: 853px;
+}

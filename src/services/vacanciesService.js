@@ -12,6 +12,9 @@ export default class VacanciesService {
       options?.payment_from !== undefined ? options.payment_from : '';
     const payment_to =
       options?.payment_to !== undefined ? options?.payment_to : '';
+    console.log(
+      `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}`
+    );
     try {
       const response = await fetch(
         `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}`,
@@ -24,12 +27,11 @@ export default class VacanciesService {
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
             'Access-Control-Allow-Origin': '*',
             Authorization:
-              'Bearer v3.r.137440105.a0685e4bf923876ea5be52eb2878c820bc478583.4d193bd3be770cdce79f3e697d2e5c6d5fb1ac76',
+              'Bearer v3.r.137440105.057f1dc06c112cdb854f43a1e89caa290c16592a.d643d4826e24cd63e623d783c865d5d2144e22ce',
           },
         }
       );
       const vacancies = await response.json();
-      console.log(vacancies.objects);
       return vacancies.objects;
     } catch (error) {
       throw error;

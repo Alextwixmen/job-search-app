@@ -19,7 +19,7 @@ const SearchInput = (props) => {
       <input
         className={styles.inputSearch}
         placeholder='Введите название вакансии'
-        onChange={props.handleCnahge}
+        onChange={props.handleChange}
         value={props.value}
       ></input>
       <button className={styles.btnInputSearch} onClick={props.onSubmit}>

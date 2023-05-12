@@ -64,7 +64,7 @@ const SingleVacancy = (props) => {
           <div className={styles.divider}>.</div>
           <div>
             {props.vacancyInfo.typeOfWork ||
-              props.vacancyInfo.type_of_work.title}
+              props.vacancyInfo.type_of_work?.title}
           </div>
         </div>
         <div className={styles.footer}>
@@ -72,7 +72,7 @@ const SingleVacancy = (props) => {
             <LocationIcon />
           </div>
           <div className={styles.footerLocation}>
-            {props.vacancyInfo.vacancyTown || props.vacancyInfo.town.title}
+            {props.vacancyInfo.vacancyTown || props.vacancyInfo.town?.title}
           </div>
         </div>
       </div>
