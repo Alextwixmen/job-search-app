@@ -9,6 +9,7 @@ const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
   const notFoundRoute = useMatch('/notFound');
+
   const navigate = useNavigate();
   let findVacancyStyle = null;
   let favoritesStyle = null;
@@ -24,19 +25,21 @@ const Layout = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <HeaderLogo />
-        <Link
-          to='/vacancy'
-          className={`${styles.links} ${styles[findVacancyStyle]}`}
-        >
-          Поиск Вакансий
-        </Link>
-        <Link
-          to='/favorites'
-          className={`${styles.links} ${styles[favoritesStyle]}`}
-        >
-          Избранное
-        </Link>
+        <div className={styles.headerContainer}>
+          <HeaderLogo />
+          <Link
+            to='/vacancy'
+            className={`${styles.links} ${styles[findVacancyStyle]}`}
+          >
+            Поиск Вакансий
+          </Link>
+          <Link
+            to='/favorites'
+            className={`${styles.links} ${styles[favoritesStyle]}`}
+          >
+            Избранное
+          </Link>
+        </div>
       </header>
       <main className={`${styles.container} ${styles.main}`}>
         <Outlet />

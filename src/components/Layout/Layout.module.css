@@ -25,3 +25,9 @@
 .activeLink {
   color: #5e96fc;
 }
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
