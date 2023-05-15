@@ -39,6 +39,21 @@ const Filter = (props) => {
     e.preventDefault();
     changeFilterInfo({});
   };
+  const numberInputStyles = {
+    input: {
+      backgroundColor: '#FFF',
+      color: '#232134',
+      padding: '12px',
+      borderRadius: '8px',
+      lineHeight: '20px',
+      fontFamily: 'Inter',
+      fontStyle: 'normal',
+      fontSize: '14px',
+      fontWeight: '400',
+      height: 'auto',
+      padding: '11px 12px 11px 12px',
+    },
+  };
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>
@@ -52,7 +67,7 @@ const Filter = (props) => {
         </div>
       </div>
       <Select
-        styles={(theme) => ({
+        styles={{
           item: {
             '&[data-selected]': {
               '&, &:hover': {
@@ -64,7 +79,18 @@ const Filter = (props) => {
             },
           },
           rightSection: { pointerEvents: 'none' },
-        })}
+          input: {
+            borderRadius: '8px',
+            padding: '11px 17px 11px 12px',
+            boxSizing: 'border-box',
+            fontFamily: 'Inter',
+            fontSize: '14px',
+            fontWeight: '400',
+            lineHeight: '20px',
+            border: '1px solid #D5D6DC',
+            height: 'auto',
+          },
+        }}
         label='Отрасль'
         placeholder='Выберите отрасль'
         rightSection={isOpen ? <UpBtn /> : <DownBtn />}
@@ -88,6 +114,7 @@ const Filter = (props) => {
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_from: e })}
         value={filterInfo.payment_from || ''}
         radius={8}
+        styles={numberInputStyles}
       />
       <NumberInput
         placeholder='До'
@@ -98,6 +125,7 @@ const Filter = (props) => {
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_to: e })}
         value={filterInfo.payment_to || ''}
         radius={8}
+        styles={numberInputStyles}
       />
 
       <Button

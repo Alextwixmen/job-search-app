@@ -23,22 +23,26 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.wrapper}>
       <header className={styles.header}>
         <div className={styles.headerContainer}>
-          <HeaderLogo />
-          <Link
-            to='/vacancy'
-            className={`${styles.links} ${styles[findVacancyStyle]}`}
-          >
-            Поиск Вакансий
-          </Link>
-          <Link
-            to='/favorites'
-            className={`${styles.links} ${styles[favoritesStyle]}`}
-          >
-            Избранное
-          </Link>
+          <nav className={styles.nav}>
+            <HeaderLogo />
+            <div className={styles.linksContainer}>
+              <Link
+                to='/vacancy'
+                className={`${styles.links} ${styles[findVacancyStyle]}`}
+              >
+                Поиск Вакансий
+              </Link>
+              <Link
+                to='/favorites'
+                className={`${styles.links} ${styles[favoritesStyle]}`}
+              >
+                Избранное
+              </Link>
+            </div>
+          </nav>
         </div>
       </header>
       <main className={`${styles.container} ${styles.main}`}>

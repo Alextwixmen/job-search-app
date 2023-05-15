@@ -9,8 +9,8 @@
 .formHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 32px;
+  gap: 67px;
 }
 .formHeaderText {
   font-style: normal;
@@ -41,6 +41,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  gap: 9px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
 }
 .applyBtnText {
   font-style: normal;

@@ -19,7 +19,7 @@ root.render(
               fontWeight: 700,
               fontSize: 16,
               lineHeight: '19px',
-              marginBottom: '8px',
+              fontFamily: 'Inter',
             },
           }),
         },
