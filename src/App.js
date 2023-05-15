@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './app.module.css';
 import { Routes, Route } from 'react-router-dom';
 import Favorites from './pages/Favorites';
@@ -7,7 +7,7 @@ import Layout from './components/Layout/Layout';
 import AuthService from './services/authService';
 import SingleVacancy from './pages/SingleVacancy/SingleVacancy';
 import NotFound from './pages/NotFound';
-// AuthService.auth();
+// AuthService.auth().then((data) => console.log(data));
 
 function App() {
   return (

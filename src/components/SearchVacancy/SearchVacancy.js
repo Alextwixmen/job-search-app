@@ -4,29 +4,33 @@ import styles from './searchVacancy.module.css';
 import { useEffect, useState } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
-import { Paginate } from '../Pagination/Paginate';
 
 const SearchVacancy = (props) => {
   const [searchVacancies, handleSearch] = useState();
   const onSubmit = () => {
-    props.changeVacancies(searchVacancies);
-  };
-  const [inputValue, changeInputValue] = useState('');
-
-  useEffect(() => {
     VacanciesService.getVacancies({
       vacancyName: inputValue,
       ...props.filterOptions,
       industry: '',
-    }).then((data) => handleSearch(data));
-  }, [inputValue]);
+    }).then((data) => {
+      handleSearch(data);
+      props.changeVacancies(data);
+    });
+  };
+  const [inputValue, changeInputValue] = useState('');
+
+  // useEffect(() => {
+  //   VacanciesService.getVacancies({
+  //     vacancyName: inputValue,
+  //     ...props.filterOptions,
+  //     industry: '',
+  //   }).then((data) => handleSearch(data));
+  // }, [inputValue]);
 
   const handleChahge = (e) => {
     props.setValue(e.target.value);
     changeInputValue(e.target.value);
   };
-
-  // console.log(props.vacancies);
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput

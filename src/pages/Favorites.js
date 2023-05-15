@@ -3,6 +3,7 @@ import SingleVacancy from '../components/SingleVacancy/SingleVacancy';
 import LocalStorageService from '../services/localStorageService';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+
 const Favorites = () => {
   const [favoriteVacancies, changeFavoriteVacancies] = useState(
     LocalStorageService.getFavoriteVacancies()
@@ -21,6 +22,7 @@ const Favorites = () => {
   return (
     <div className={styles.favoritesContainer}>
       {favoriteVacancies.map((vacancy) => {
+        console.log(vacancy);
         return (
           <SingleVacancy
             vacancyInfo={vacancy}

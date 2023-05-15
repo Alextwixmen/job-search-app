@@ -15,6 +15,7 @@
   outline: none;
   box-sizing: border-box;
   margin-left: 8px;
+  font-family: 'Inter';
 }
 .inputSearch::placeholder {
   font-family: 'Inter';
@@ -22,6 +23,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
+  color: #acadb9;
 }
 .btnInputSearch {
   padding: 5.5px 20px;

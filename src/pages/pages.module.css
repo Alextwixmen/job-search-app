@@ -3,7 +3,6 @@
   max-width: 1116px;
   display: flex;
   gap: 28px;
-  padding-top: 40px;
 }
 .findVacancyContainer {
   display: flex;
@@ -13,17 +12,14 @@
 }
 .favoritesContainer {
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 773px;
 }
 .notFoundContainer {
   margin: 0 auto;
-  max-width: 1440px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 773px;
 }
 .notFoundPic {
-  margin-top: 120px;
+  margin-top: 80px;
   margin-bottom: 30px;
 }
 .notFoundItems {
@@ -39,7 +35,7 @@
   font-size: 24px;
   line-height: 29px;
   color: #343a40;
-  margin-bottom: 42px;
+  margin-bottom: 34px;
 }
 .btnText {
   font-family: 'Open Sans';
@@ -57,14 +53,14 @@
   border-radius: 8px;
 }
 .vacancySearch {
+  padding: 10px 24px;
   border: none;
   outline: none;
-  padding: 10px 24px 10px 24px;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
-  line-height: 155%;
+  line-height: 22px;
   color: #3b7cd3;
   background-color: #deecff;
   border-radius: 8px;
@@ -80,6 +76,5 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  /* gap: 104px; */
   min-height: 770px;
 }

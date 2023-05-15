@@ -6,18 +6,23 @@ import { ReactComponent as LocationIcon } from '../../assets/icons/LocationIcon.
 import { useState } from 'react';
 
 const SingleVacancy = (props) => {
-  const [isFavoriteStar, setFavoriteStar] = useState(false);
+  const [isFavoriteStar, setFavoriteStar] = useState(null);
   const handleStarClick = (vacancyInfo) => {
-    setFavoriteStar(true);
-    const shortVacancyInfo = {
-      typeOfWork: vacancyInfo.type_of_work.title,
-      vacancyTown: vacancyInfo.town.title,
-      profession: vacancyInfo.profession,
-      payment_from: vacancyInfo.payment_from,
-      key: props.vacancyInfo.id,
-      vacancyRichText: vacancyInfo.vacancyRichText,
-    };
-    LocalStorageService.setItem(shortVacancyInfo);
+    if (LocalStorageService.getItem(props.vacancyInfo.id)) {
+      LocalStorageService.deleteItem(props.vacancyInfo.id);
+      setFavoriteStar(false);
+    } else {
+      setFavoriteStar(true);
+      const shortVacancyInfo = {
+        typeOfWork: vacancyInfo.type_of_work.title,
+        vacancyTown: vacancyInfo.town.title,
+        profession: vacancyInfo.profession,
+        payment_from: vacancyInfo.payment_from,
+        key: props.vacancyInfo.id,
+        vacancyRichText: vacancyInfo.vacancyRichText,
+      };
+      LocalStorageService.setItem(shortVacancyInfo);
+    }
   };
 
   const handlePrevent = (e) => {
@@ -29,16 +34,26 @@ const SingleVacancy = (props) => {
     props.handleDeleteVacancy !== undefined
       ? props.handleDeleteVacancy
       : handleStarClick;
-
   const favoriteStar =
-    props.favoriteStar ||
     localStorage.getItem(props.vacancyInfo.id) ||
-    isFavoriteStar
+    localStorage.getItem(props.vacancyInfo.key)
       ? 'favoriteStarIcon'
       : null;
   const vacancyId = props.vacancyInfo.id
     ? props.vacancyInfo.id
     : props.vacancyInfo.key;
+  const vacancyName = props.isVacancyDescription
+    ? 'vacancyDescriptionName'
+    : 'vacancyName';
+  const vacancySalary = props.isVacancyDescription
+    ? 'vacancyDescriptionSalary'
+    : 'salaryInfo';
+  const typeOfWork = props.isVacancyDescription
+    ? 'vacancyDesciptionType'
+    : 'typeOfWork';
+  const vacancyMainPart = props.isVacancyDescription
+    ? 'vacancyDescriptionMain'
+    : 'vacancyMainPart';
   return (
     <Link
       to={`/vacancy/${vacancyId}`}
@@ -47,7 +62,7 @@ const SingleVacancy = (props) => {
     >
       <div className={styles.singlaVacancyContainer}>
         <div className={styles.vacancyHeader}>
-          <div className={styles.vacancyName}>
+          <div className={styles[vacancyName]}>
             {props.vacancyInfo.profession && props.vacancyInfo.profession}
           </div>
           <button
@@ -57,12 +72,12 @@ const SingleVacancy = (props) => {
             <Star className={`${styles.star} ${styles[favoriteStar]}`} />
           </button>
         </div>
-        <div className={styles.vacancyMainPart}>
-          <div className={styles.salaryInfo}>
+        <div className={styles[vacancyMainPart]}>
+          <div className={styles[vacancySalary]}>
             з/п от {props.vacancyInfo.payment_from} {props.vacancyInfo.currency}
           </div>
           <div className={styles.divider}>.</div>
-          <div>
+          <div className={styles[typeOfWork]}>
             {props.vacancyInfo.typeOfWork ||
               props.vacancyInfo.type_of_work?.title}
           </div>

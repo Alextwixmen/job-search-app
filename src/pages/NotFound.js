@@ -15,23 +15,6 @@ const NotFound = () => {
         <button onClick={handleClick} className={styles.vacancySearch}>
           Поиск Вакансий
         </button>
-        {/* <Button
-          variant='light'
-          radius={8}
-          pt={10}
-          pb={10}
-          pl={24}
-          pr={24}
-          style={{
-            fontSize: '14px',
-            color: '#3B7CD3',
-            fontFamily: 'Open Sans',
-            fontWeight: 600,
-          }}
-        >
-          Поиск Вакансий
-          {/* <span className={styles.btnText}>Поиск Вакансий</span> */}
-        {/* </Button> */}
       </div>
     </div>
   );
