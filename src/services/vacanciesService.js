@@ -1,14 +1,11 @@
 export default class VacanciesService {
   static total = null;
   static getVacancies = async (options) => {
-    const page = options?.page !== undefined ? options.page : '';
-    const keyWord =
-      options?.vacancyName !== undefined ? options.vacancyName : '';
-    const industry = options?.industry !== undefined ? options.industry : '';
-    const payment_from =
-      options?.payment_from !== undefined ? options.payment_from : '';
-    const payment_to =
-      options?.payment_to !== undefined ? options?.payment_to : '';
+    const page = options?.page || '';
+    const keyWord = options?.vacancyName || '';
+    const industry = options?.industry || '';
+    const payment_from = options?.payment_from || '';
+    const payment_to = options?.payment_to || '';
     console.log(
       `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1`
     );
