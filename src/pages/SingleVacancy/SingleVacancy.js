@@ -7,7 +7,14 @@ export const SingleVacancy = (props) => {
   const { from } = location.state;
   return (
     <div className={styles.singleVacancyContainer}>
-      <Vacancy vacancyInfo={from} isVacancyDescription={true} />
+      <Vacancy
+        vacancyInfo={from}
+        isVacancyDescription={true}
+        vacancyName={'vacancyDescriptionName'}
+        vacancySalary={'vacancyDescriptionSalary'}
+        typeOfWork={'vacancyDesciptionType'}
+        vacancyMainPart={'vacancyDescriptionMain'}
+      />
       <VacancyDescription vacancyInfo={from} />
     </div>
   );

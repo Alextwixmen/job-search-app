@@ -1,7 +1,7 @@
 import { Select, Button } from '@mantine/core';
 import styles from './Filter.module.css';
 import { useEffect, useState } from 'react';
-import { NumberInput } from '@mantine/core';
+import { NumberInput, NumberInputHandlers } from '@mantine/core';
 import IndustryService from '../../services/industryService';
 import VacanciesService from '../../services/vacanciesService';
 import { ReactComponent as CloseIcon } from '../../assets/icons/CloseIcon.svg';
@@ -9,6 +9,8 @@ import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
 import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
 import { ReactComponent as UpBtnNumberInput } from '../../assets/icons/UpBtnNumberInput.svg';
 import { useHover } from '@mantine/hooks';
+import { useRef } from 'react';
+
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
   const [industryVocabluary] = useState({});
@@ -104,6 +106,7 @@ const Filter = (props) => {
         onDropdownClose={() => setOpen(false)}
         onDropdownOpen={() => setOpen(true)}
       />
+
       <NumberInput
         label='Оклад'
         placeholder='От'
@@ -128,9 +131,8 @@ const Filter = (props) => {
         styles={numberInputStyles}
       />
 
-      <Button
-        w={'100%'}
-        c={'white'}
+      <button
+        className={styles.applyButton}
         onClick={() =>
           props.handleFilter({
             ...filterInfo,
@@ -139,7 +141,7 @@ const Filter = (props) => {
         }
       >
         <span className={styles.applyBtnText}>Применить</span>
-      </Button>
+      </button>
     </form>
   );
 };

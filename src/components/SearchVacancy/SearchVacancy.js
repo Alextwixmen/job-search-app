@@ -49,7 +49,16 @@ const SearchVacancy = (props) => {
       />
       <div className={styles.singleVacancyContainer}>
         {props.vacancies.map((elem) => {
-          return <SingleVacancy vacancyInfo={elem} key={elem.id} />;
+          return (
+            <SingleVacancy
+              vacancyInfo={elem}
+              key={elem.id}
+              vacancyName={'vacancyName'}
+              vacancySalary={'salaryInfo'}
+              typeOfWork={'typeOfWork'}
+              vacancyMainPart={'vacancyMainPart'}
+            />
+          );
         })}
       </div>
     </div>

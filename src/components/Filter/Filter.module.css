@@ -54,6 +54,7 @@
   font-size: 14px;
   line-height: 21px;
   text-align: center;
+  color: white;
 }
 .closeIcon:hover * {
   stroke: #92c1ff;
@@ -62,4 +63,24 @@
 .closeIcon:active * {
   stroke: #5e96fc;
   fill: #5e96fc;
+}
+.numberInputUp {
+  outline: none;
+  border: 0;
+  background: transparent;
+}
+.applyButton {
+  outline: none;
+  border: 0;
+  background-color: #5e96fc;
+  width: 100%;
+  padding: 9.5px 98.5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.applyButton:hover {
+  background-color: #92c1ff;
+}
+.applyButton:active {
+  background-color: #3b7cd3;
 }
