@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LocalStorageService from '../../services/localStorageService';
 import { ReactComponent as Star } from '../../assets/icons/Save Button.svg';
 import { ReactComponent as LocationIcon } from '../../assets/icons/LocationIcon.svg';
+import { ReactComponent as Dot } from '../../assets/icons/dot.svg';
 import { useState } from 'react';
 
 const SingleVacancy = (props) => {
@@ -76,7 +77,7 @@ const SingleVacancy = (props) => {
           <div className={styles[vacancySalary]}>
             з/п от {props.vacancyInfo.payment_from} {props.vacancyInfo.currency}
           </div>
-          <div className={styles.divider}>.</div>
+          <Dot />
           <div className={styles[typeOfWork]}>
             {props.vacancyInfo.typeOfWork ||
               props.vacancyInfo.type_of_work?.title}

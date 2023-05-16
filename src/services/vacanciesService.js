@@ -27,7 +27,6 @@ export default class VacanciesService {
       );
       const vacancies = await response.json();
       this.total = vacancies.total;
-      console.log(vacancies.objects);
       return vacancies.objects;
     } catch (error) {
       throw error;

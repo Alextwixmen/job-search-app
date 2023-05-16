@@ -3,12 +3,13 @@ import styles from './Layout.module.css';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import { useMatch } from 'react-router-dom';
 import { useMatches } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
   const notFoundRoute = useMatch('/notFound');
+  const location = useLocation();
 
   const navigate = useNavigate();
   let findVacancyStyle = null;
@@ -19,7 +20,9 @@ const Layout = () => {
     favoritesStyle = 'activeLink';
   }
   useEffect(() => {
-    navigate('/vacancy');
+    if (location.pathname === '/') {
+      navigate('/vacancy');
+    }
   }, []);
 
   return (
