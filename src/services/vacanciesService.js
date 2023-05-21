@@ -1,15 +1,29 @@
+import LocalStorageService from './localStorageService';
+import dateHelper from '../utils/dateHelper';
+import AuthService from './authService';
 export default class VacanciesService {
   static total = null;
   static getVacancies = async (options) => {
-    const page = options?.page || '';
+    const page = options?.page - 1 || '';
     const keyWord = options?.vacancyName || '';
     const industry = options?.industry || '';
     const payment_from = options?.payment_from || '';
     const payment_to = options?.payment_to || '';
-    console.log(
-      `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1&published=1`
-    );
     try {
+      const isRefresh = dateHelper(
+        JSON.parse(localStorage.getItem('bearer'))?.ttl
+      );
+      if (isRefresh) {
+        const access_token = JSON.parse(
+          LocalStorageService.getItem('bearer')
+        ).access_token;
+        const tokenData = await AuthService.refreshToken(access_token);
+        LocalStorageService.setBearer(JSON.stringify(tokenData));
+      }
+      // console.log(
+      //   `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1&published=1`
+      // );
+      console.log(page);
       const response = await fetch(
         `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1&published=1`,
         {
@@ -20,23 +34,18 @@ export default class VacanciesService {
               'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
             'Access-Control-Allow-Origin': '*',
-            Authorization:
-              'Bearer v3.r.137440105.057f1dc06c112cdb854f43a1e89caa290c16592a.d643d4826e24cd63e623d783c865d5d2144e22ce',
+            Authorization: `Bearer ${
+              JSON.parse(LocalStorageService.getItem('bearer')).access_token
+            }`,
           },
         }
       );
       const vacancies = await response.json();
       this.total = vacancies.total;
+      console.log(this.total);
       return vacancies.objects;
     } catch (error) {
       throw error;
     }
-  };
-
-  static refresh = async () => {
-    const response = await fetch(
-      'https://startup-summer-2023-proxy.onrender.com/2.0/oauth2/refresh_token/',
-      {}
-    );
   };
 }

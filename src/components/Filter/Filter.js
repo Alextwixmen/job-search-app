@@ -8,13 +8,13 @@ import { ReactComponent as CloseIcon } from '../../assets/icons/CloseIcon.svg';
 import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
 import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
 import { ReactComponent as UpBtnNumberInput } from '../../assets/icons/UpBtnNumberInput.svg';
-import { useHover } from '@mantine/hooks';
-import { useRef } from 'react';
+import LocalStorageService from '../../services/localStorageService';
 
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
   const [industryVocabluary] = useState({});
   const [isOpen, setOpen] = useState(false);
+  const [filterInfo, changeFilterInfo] = useState({});
   useEffect(() => {
     async function fetchData() {
       const response = await IndustryService.getIndustries();
@@ -22,15 +22,19 @@ const Filter = (props) => {
         industryVocabluary[industry.title] = industry.key;
         return [...acc, industry.title];
       }, []);
-
       changeIndustries(namesOfIndustries);
     }
     fetchData();
   }, []);
 
-  const [filterInfo, changeFilterInfo] = useState({});
-
   useEffect(() => {
+    const options = JSON.parse(LocalStorageService.getItem('options'));
+    if (filterInfo.industry !== undefined) {
+      LocalStorageService.setItem({
+        ...options,
+        industry: filterInfo.industry,
+      });
+    }
     props.handleFilterOptions({
       ...filterInfo,
       industry: industryVocabluary[filterInfo.industry],
@@ -102,7 +106,11 @@ const Filter = (props) => {
         onChange={(e) => {
           changeFilterInfo({ ...filterInfo, industry: e });
         }}
-        value={filterInfo.industry || ''}
+        value={
+          filterInfo.industry ||
+          JSON.parse(LocalStorageService.getItem('options'))?.industryName ||
+          ''
+        }
         onDropdownClose={() => setOpen(false)}
         onDropdownOpen={() => setOpen(true)}
       />
@@ -115,7 +123,11 @@ const Filter = (props) => {
         mb={8}
         step={1000}
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_from: e })}
-        value={filterInfo.payment_from || ''}
+        value={
+          filterInfo.payment_from ||
+          JSON.parse(LocalStorageService.getItem('options'))?.payment_from ||
+          ''
+        }
         radius={8}
         styles={numberInputStyles}
       />
@@ -126,7 +138,11 @@ const Filter = (props) => {
         mb={20}
         step={1000}
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_to: e })}
-        value={filterInfo.payment_to || ''}
+        value={
+          filterInfo.payment_to ||
+          JSON.parse(LocalStorageService.getItem('options'))?.payment_to ||
+          ''
+        }
         radius={8}
         styles={numberInputStyles}
       />

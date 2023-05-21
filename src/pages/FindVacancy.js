@@ -4,15 +4,19 @@ import SearchVacancy from '../components/SearchVacancy/SearchVacancy';
 import { useState, useEffect } from 'react';
 import VacanciesService from '../services/vacanciesService';
 import { Paginate } from '../components/Pagination/Paginate';
+import LocalStorageService from '../services/localStorageService';
 
-const FindVacancy = () => {
+const FindVacancy = (props) => {
   const [vacancies, changeVacancies] = useState();
   const [isLoading, setLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState();
   const [inputValue, setValue] = useState('');
   const [totalPages, setTotal] = useState(0);
+  const [activePage, setPage] = useState(1);
   useEffect(() => {
-    let response = VacanciesService.getVacancies();
+    let response = VacanciesService.getVacancies(
+      JSON.parse(LocalStorageService.getItem('options'))
+    );
     setLoading(true);
     response.then((data) => {
       changeVacancies(data);
@@ -21,9 +25,15 @@ const FindVacancy = () => {
   }, []);
 
   const handleFilter = (filterInfo) => {
+    console.log('filterInfo', filterInfo);
+    LocalStorageService.setItem({
+      ...JSON.parse(LocalStorageService.getItem('options')),
+      page: 1,
+    });
     const filteredVacancies = VacanciesService.getVacancies({
       vacancyName: inputValue,
       ...filterInfo,
+      page: 1,
     });
     setLoading(true);
     filteredVacancies.then((vacancy) => {
@@ -32,8 +42,31 @@ const FindVacancy = () => {
     });
   };
 
+  const handleFilterOptions = (info) => {
+    const options = JSON.parse(LocalStorageService.getItem('options'));
+    if (options) {
+      LocalStorageService.setItem({
+        ...options,
+        payment_from: info.payment_from || options.payment_from,
+        payment_to: info.payment_to || options.payment_to,
+        industry:
+          info.industry ||
+          JSON.parse(LocalStorageService.getItem('options')).industry,
+      });
+    } else {
+      LocalStorageService.setItem({
+        key: 'options',
+        payment_from: info.payment_from,
+        payment_to: info.payment_to,
+      });
+    }
+    setFilterOptions(info);
+  };
+
   const handlePagination = (e) => {
-    console.log('filterOptions', filterOptions);
+    const options = JSON.parse(LocalStorageService.getItem('options'));
+    LocalStorageService.setItem({ ...options, key: 'options', page: e });
+    setPage(e);
     const vacancies = VacanciesService.getVacancies({
       ...filterOptions,
       page: e,
@@ -46,18 +79,17 @@ const FindVacancy = () => {
       setLoading(false);
     });
   };
-  const handleFilterOptions = (info) => {
-    setFilterOptions(info);
-  };
+
   useEffect(() => {
     if (VacanciesService.total > 500) {
       setTotal(125);
-    } else if (VacanciesService.total === 0) {
+    } else if (!VacanciesService.total) {
       setTotal(1);
     } else {
       setTotal(Math.floor(VacanciesService.total / 4));
     }
   }, [VacanciesService.total]);
+  // console.log(filterOptions?.industry);
   return (
     <div className={styles.container}>
       <Filter
@@ -73,7 +105,15 @@ const FindVacancy = () => {
           setValue={setValue}
           filterOptions={filterOptions}
         />
-        <Paginate total={totalPages} handlePagination={handlePagination} />
+        <Paginate
+          total={totalPages}
+          handlePagination={handlePagination}
+          page={
+            JSON.parse(LocalStorageService.getItem('options'))?.page ||
+            activePage
+          }
+          setPage={setPage}
+        />
       </div>
     </div>
   );

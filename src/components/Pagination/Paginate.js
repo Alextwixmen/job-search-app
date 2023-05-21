@@ -10,6 +10,7 @@ export const Paginate = (props) => {
         total={props.total}
         onChange={(e) => props.handlePagination(e)}
         color='#5E96FC'
+        value={props.page}
       />
     </div>
   );

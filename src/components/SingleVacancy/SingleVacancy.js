@@ -5,26 +5,37 @@ import { ReactComponent as Star } from '../../assets/icons/Save Button.svg';
 import { ReactComponent as LocationIcon } from '../../assets/icons/LocationIcon.svg';
 import { ReactComponent as Dot } from '../../assets/icons/dot.svg';
 import { useState } from 'react';
-
+import divideFavoritesVacancies from '../../utils/divideFavoritesVacancies';
+import isVacancyFavorite from '../../utils/isVacansyFavorite';
+import refillFavoritesVacancies from '../../utils/refillFavoritesVacancies';
 const SingleVacancy = (props) => {
   const [isFavoriteStar, setFavoriteStar] = useState(null);
   const handleStarClick = (vacancyInfo) => {
-    if (LocalStorageService.getItem(props.vacancyInfo.id)) {
-      LocalStorageService.deleteItem(props.vacancyInfo.id);
-      setFavoriteStar(false);
-    } else {
+    const shortVacancyInfo = {
+      typeOfWork: vacancyInfo.type_of_work.title,
+      vacancyTown: vacancyInfo.town.title,
+      profession: vacancyInfo.profession,
+      payment_from: vacancyInfo.payment_from,
+      key: props.vacancyInfo.id,
+      vacancyRichText: vacancyInfo.vacancyRichText,
+      payment_to: vacancyInfo.payment_to,
+      currency: vacancyInfo.currency,
+    };
+    const isFavorite = isVacancyFavorite(vacancyInfo.id);
+    if (!isFavorite) {
       setFavoriteStar(true);
-      const shortVacancyInfo = {
-        typeOfWork: vacancyInfo.type_of_work.title,
-        vacancyTown: vacancyInfo.town.title,
-        profession: vacancyInfo.profession,
-        payment_from: vacancyInfo.payment_from,
-        key: props.vacancyInfo.id,
-        vacancyRichText: vacancyInfo.vacancyRichText,
-        payment_to: vacancyInfo.payment_to,
-        currency: vacancyInfo.currency,
-      };
-      LocalStorageService.setItem(shortVacancyInfo);
+      divideFavoritesVacancies(shortVacancyInfo);
+    } else {
+      const favoriteVacancies = LocalStorageService.getFavoriteVacancies();
+      if (!favoriteVacancies) return null;
+      for (let arr of favoriteVacancies) {
+        for (let vacancy of arr) {
+          if (vacancy.key === vacancyInfo.id) {
+            refillFavoritesVacancies(vacancy);
+            setFavoriteStar(false);
+          }
+        }
+      }
     }
   };
 
@@ -37,14 +48,16 @@ const SingleVacancy = (props) => {
     props.handleDeleteVacancy !== undefined
       ? props.handleDeleteVacancy
       : handleStarClick;
+
   const favoriteStar =
-    localStorage.getItem(props.vacancyInfo.id) ||
-    localStorage.getItem(props.vacancyInfo.key)
+    isVacancyFavorite(props.vacancyInfo.id) || props.favoriteStar
       ? 'favoriteStarIcon'
       : null;
+
   const vacancyId = props.vacancyInfo.id
     ? props.vacancyInfo.id
     : props.vacancyInfo.key;
+
   return (
     <Link
       to={`/vacancy/${vacancyId}`}
