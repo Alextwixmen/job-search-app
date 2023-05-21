@@ -5,41 +5,29 @@ import { useEffect, useState } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
 import LocalStorageService from '../../services/localStorageService';
-
+import OptionsService from '../../services/OptionsService';
 const SearchVacancy = (props) => {
-  const [searchVacancies, handleSearch] = useState();
+  const [inputValue, changeInputValue] = useState('');
   const onSubmit = () => {
+    console.log(props.filterOptions, inputValue);
     VacanciesService.getVacancies({
-      vacancyName:
-        inputValue ||
-        JSON.parse(LocalStorageService.getItem('options'))?.inputValue,
+      vacancyName: inputValue,
       ...props.filterOptions,
-      industry: '',
     }).then((data) => {
-      handleSearch(data);
       props.changeVacancies(data);
     });
   };
-  const [inputValue, changeInputValue] = useState('');
 
   const handleChahge = (e) => {
     props.setValue(e.target.value);
     changeInputValue(e.target.value);
-    const options = JSON.parse(LocalStorageService.getItem('options'));
-    LocalStorageService.setItem({
-      ...options,
-      inputValue: e.target.value,
-      key: 'options',
-    });
+    OptionsService.setInputValue(e.target.value);
   };
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput
         handleChange={handleChahge}
-        value={
-          inputValue ||
-          JSON.parse(LocalStorageService.getItem('options'))?.inputValue
-        }
+        value={inputValue}
         onSubmit={onSubmit}
       />
       <Loader />
@@ -48,11 +36,9 @@ const SearchVacancy = (props) => {
     <div className={styles.searchVacancyContainer}>
       <SearchInput
         handleChange={handleChahge}
-        value={
-          inputValue ||
-          JSON.parse(LocalStorageService.getItem('options'))?.inputValue
-        }
+        value={inputValue}
         onSubmit={onSubmit}
+        inputValue={props.filterOptions}
       />
       <div className={styles.singleVacancyContainer}>
         {props.vacancies.map((elem) => {

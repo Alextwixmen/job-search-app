@@ -2,7 +2,7 @@ export default class IndustryService {
   static getIndustries = async (value) => {
     try {
       const response = await fetch(
-        `https://startup-summer-2023-proxy.onrender.com/2.0/catalogues/`,
+        `https://startup-summer-proxy-production.up.railway.app/2.0/catalogues/`,
         {
           headers: {
             Host: 'api.superjob.ru',

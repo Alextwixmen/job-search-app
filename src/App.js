@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import styles from './app.module.css';
 import { Routes, Route } from 'react-router-dom';
 import Favorites from './pages/Favorites';
@@ -9,6 +9,7 @@ import SingleVacancy from './pages/SingleVacancy/SingleVacancy';
 import NotFound from './pages/NotFound';
 import LocalStorageService from './services/localStorageService';
 import dateHelper from './utils/dateHelper';
+import OptionsService from './services/OptionsService';
 
 // AuthService.auth().then((data) => console.log(data));
 localStorage.setItem(
@@ -26,8 +27,12 @@ localStorage.setItem(
 );
 function App() {
   LocalStorageService.deleteItem('options');
+
+  useLayoutEffect(() => {
+    localStorage.setItem('favoritesVacancies', JSON.stringify([]));
+    OptionsService.resetAllOptions();
+  }, []);
   useEffect(() => {
-    // // localStorage.setItem('favoritesVacancies', JSON.stringify([]));
     // if (!localStorage.getItem('bearer')) {
     //   // AuthService.auth().then((data) =>
     //   //   LocalStorageService.setBearer(JSON.stringify(data))
@@ -53,6 +58,7 @@ function App() {
         <Route path='favorites' element={<Favorites />} />
         <Route path='/vacancy/:id' element={<SingleVacancy />} />
         <Route path='/notFound' element={<NotFound />} />
+        <Route path='/vacancy/:query' element={<FindVacancy />} />
       </Route>
     </Routes>
   );

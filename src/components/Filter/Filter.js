@@ -1,15 +1,13 @@
-import { Select, Button } from '@mantine/core';
+import { Select } from '@mantine/core';
 import styles from './Filter.module.css';
-import { useEffect, useState } from 'react';
-import { NumberInput, NumberInputHandlers } from '@mantine/core';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { NumberInput } from '@mantine/core';
 import IndustryService from '../../services/industryService';
-import VacanciesService from '../../services/vacanciesService';
 import { ReactComponent as CloseIcon } from '../../assets/icons/CloseIcon.svg';
 import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
 import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
 import { ReactComponent as UpBtnNumberInput } from '../../assets/icons/UpBtnNumberInput.svg';
-import LocalStorageService from '../../services/localStorageService';
-
+import OptionsService from '../../services/OptionsService';
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
   const [industryVocabluary] = useState({});
@@ -26,22 +24,18 @@ const Filter = (props) => {
     }
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const options = JSON.parse(LocalStorageService.getItem('options'));
-    if (filterInfo.industry !== undefined) {
-      LocalStorageService.setItem({
-        ...options,
-        industry: filterInfo.industry,
-      });
-    }
-    props.handleFilterOptions({
-      ...filterInfo,
-      industry: industryVocabluary[filterInfo.industry],
-    });
-  }, [filterInfo]);
-
+  // useLayoutEffect(() => {
+  //   console.log(
+  //     'props.filterOptions in useLayoutEffect filter',
+  //     props.filterOptions
+  //   );
+  //   changeFilterInfo({
+  //     ...props.filterOptions,
+  //     industry: props?.filterOptions?.industryName,
+  //   });
+  // });
   const handleResetButton = (e) => {
+    OptionsService.resetFilterOpntions();
     e.preventDefault();
     changeFilterInfo({});
   };
@@ -106,11 +100,7 @@ const Filter = (props) => {
         onChange={(e) => {
           changeFilterInfo({ ...filterInfo, industry: e });
         }}
-        value={
-          filterInfo.industry ||
-          JSON.parse(LocalStorageService.getItem('options'))?.industryName ||
-          ''
-        }
+        value={filterInfo.industry || OptionsService.getIndustryName() || ''}
         onDropdownClose={() => setOpen(false)}
         onDropdownOpen={() => setOpen(true)}
       />
@@ -124,9 +114,7 @@ const Filter = (props) => {
         step={1000}
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_from: e })}
         value={
-          filterInfo.payment_from ||
-          JSON.parse(LocalStorageService.getItem('options'))?.payment_from ||
-          ''
+          filterInfo.payment_from || OptionsService.getPayment_from() || ''
         }
         radius={8}
         styles={numberInputStyles}
@@ -138,11 +126,7 @@ const Filter = (props) => {
         mb={20}
         step={1000}
         onChange={(e) => changeFilterInfo({ ...filterInfo, payment_to: e })}
-        value={
-          filterInfo.payment_to ||
-          JSON.parse(LocalStorageService.getItem('options'))?.payment_to ||
-          ''
-        }
+        value={filterInfo.payment_to || OptionsService.getPayment_to() || ''}
         radius={8}
         styles={numberInputStyles}
       />
@@ -153,6 +137,7 @@ const Filter = (props) => {
           props.handleFilter({
             ...filterInfo,
             industry: industryVocabluary[filterInfo.industry],
+            industryName: filterInfo.industry,
           })
         }
       >

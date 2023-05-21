@@ -1,11 +1,11 @@
 import styles from './pages.module.css';
 import Filter from '../components/Filter/Filter';
 import SearchVacancy from '../components/SearchVacancy/SearchVacancy';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import VacanciesService from '../services/vacanciesService';
 import { Paginate } from '../components/Pagination/Paginate';
 import LocalStorageService from '../services/localStorageService';
-
+import OptionsService from '../services/OptionsService';
 const FindVacancy = (props) => {
   const [vacancies, changeVacancies] = useState();
   const [isLoading, setLoading] = useState(true);
@@ -13,23 +13,24 @@ const FindVacancy = (props) => {
   const [inputValue, setValue] = useState('');
   const [totalPages, setTotal] = useState(0);
   const [activePage, setPage] = useState(1);
+  const [previousOptions, setPreviousOptions] = useState({});
   useEffect(() => {
-    let response = VacanciesService.getVacancies(
-      JSON.parse(LocalStorageService.getItem('options'))
-    );
+    const options = OptionsService.getAllOptions();
     setLoading(true);
-    response.then((data) => {
+    VacanciesService.getVacancies(options).then((data) => {
       changeVacancies(data);
       setLoading(false);
     });
   }, []);
 
+  useLayoutEffect(() => {
+    const options = OptionsService.getAllOptions();
+    setFilterOptions(options);
+  }, []);
+
   const handleFilter = (filterInfo) => {
-    console.log('filterInfo', filterInfo);
-    LocalStorageService.setItem({
-      ...JSON.parse(LocalStorageService.getItem('options')),
-      page: 1,
-    });
+    OptionsService.setFilterOpntions(filterInfo);
+    setFilterOptions(filterInfo);
     const filteredVacancies = VacanciesService.getVacancies({
       vacancyName: inputValue,
       ...filterInfo,
@@ -42,35 +43,12 @@ const FindVacancy = (props) => {
     });
   };
 
-  const handleFilterOptions = (info) => {
-    const options = JSON.parse(LocalStorageService.getItem('options'));
-    if (options) {
-      LocalStorageService.setItem({
-        ...options,
-        payment_from: info.payment_from || options.payment_from,
-        payment_to: info.payment_to || options.payment_to,
-        industry:
-          info.industry ||
-          JSON.parse(LocalStorageService.getItem('options')).industry,
-      });
-    } else {
-      LocalStorageService.setItem({
-        key: 'options',
-        payment_from: info.payment_from,
-        payment_to: info.payment_to,
-      });
-    }
-    setFilterOptions(info);
-  };
-
   const handlePagination = (e) => {
-    const options = JSON.parse(LocalStorageService.getItem('options'));
-    LocalStorageService.setItem({ ...options, key: 'options', page: e });
+    OptionsService.setPageNumber(e);
     setPage(e);
     const vacancies = VacanciesService.getVacancies({
       ...filterOptions,
       page: e,
-      count: '',
       vacancyName: inputValue,
     });
     setLoading(true);
@@ -86,16 +64,12 @@ const FindVacancy = (props) => {
     } else if (!VacanciesService.total) {
       setTotal(1);
     } else {
-      setTotal(Math.floor(VacanciesService.total / 4));
+      setTotal(Math.ceil(VacanciesService.total / 4));
     }
   }, [VacanciesService.total]);
-  // console.log(filterOptions?.industry);
   return (
     <div className={styles.container}>
-      <Filter
-        handleFilter={handleFilter}
-        handleFilterOptions={handleFilterOptions}
-      />
+      <Filter handleFilter={handleFilter} filterOptions={filterOptions} />
       <div className={styles.innerContainer}>
         <SearchVacancy
           vacancies={vacancies}
