@@ -18,14 +18,9 @@ const FindVacancy = (props) => {
     setValue(options.vacancyName);
     setPage(Number(options.page) ? Number(options.page) : 1);
     setLoading(true);
-
     VacanciesService.getVacancies(options).then((data) => {
-      if (data === null) {
-        console.log('data =>>', data);
-      } else {
-        changeVacancies(data);
-        setLoading(false);
-      }
+      changeVacancies(data);
+      setLoading(false);
     });
   }, []);
 
