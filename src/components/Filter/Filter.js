@@ -13,6 +13,10 @@ const Filter = (props) => {
   const [industryVocabluary] = useState({});
   const [isOpen, setOpen] = useState(false);
   const [filterInfo, changeFilterInfo] = useState({});
+  const [industry, changeIndustry] = useState('');
+  const [payment_from, setPaymentFrom] = useState('');
+  const [payment_to, setPaymentTo] = useState('');
+  const [industryId, setIndustryId] = useState('');
   useEffect(() => {
     async function fetchData() {
       const response = await IndustryService.getIndustries();
@@ -24,21 +28,32 @@ const Filter = (props) => {
     }
     fetchData();
   }, []);
-  // useLayoutEffect(() => {
-  //   console.log(
-  //     'props.filterOptions in useLayoutEffect filter',
-  //     props.filterOptions
-  //   );
-  //   changeFilterInfo({
-  //     ...props.filterOptions,
-  //     industry: props?.filterOptions?.industryName,
-  //   });
-  // });
+
+  useEffect(() => {
+    changeIndustry(props.industryName);
+  }, [props.industryName]);
+
+  useEffect(() => {
+    setPaymentFrom(props.payment_from);
+  }, [props.payment_from]);
+
+  useEffect(() => {
+    setPaymentTo(props.payment_to);
+  }, [props.payment_to]);
+
+  useEffect(() => {
+    setIndustryId(industryId);
+  }, [props.industry]);
+
   const handleResetButton = (e) => {
     OptionsService.resetFilterOpntions();
     e.preventDefault();
-    changeFilterInfo({});
+    changeIndustry('');
+    setPaymentFrom('');
+    setPaymentTo('');
+    setIndustryId('');
   };
+
   const numberInputStyles = {
     input: {
       backgroundColor: '#FFF',
@@ -98,9 +113,9 @@ const Filter = (props) => {
         data={industries}
         mb={20}
         onChange={(e) => {
-          changeFilterInfo({ ...filterInfo, industry: e });
+          changeIndustry(e);
         }}
-        value={filterInfo.industry || OptionsService.getIndustryName() || ''}
+        value={industry}
         onDropdownClose={() => setOpen(false)}
         onDropdownOpen={() => setOpen(true)}
       />
@@ -112,10 +127,8 @@ const Filter = (props) => {
         min={0}
         mb={8}
         step={1000}
-        onChange={(e) => changeFilterInfo({ ...filterInfo, payment_from: e })}
-        value={
-          filterInfo.payment_from || OptionsService.getPayment_from() || ''
-        }
+        onChange={(e) => setPaymentFrom(e)}
+        value={payment_from}
         radius={8}
         styles={numberInputStyles}
       />
@@ -125,21 +138,22 @@ const Filter = (props) => {
         min={0}
         mb={20}
         step={1000}
-        onChange={(e) => changeFilterInfo({ ...filterInfo, payment_to: e })}
-        value={filterInfo.payment_to || OptionsService.getPayment_to() || ''}
+        onChange={(e) => setPaymentTo(e)}
+        value={payment_to}
         radius={8}
         styles={numberInputStyles}
       />
 
       <button
         className={styles.applyButton}
-        onClick={() =>
+        onClick={() => {
           props.handleFilter({
-            ...filterInfo,
-            industry: industryVocabluary[filterInfo.industry],
-            industryName: filterInfo.industry,
-          })
-        }
+            industryName: industry,
+            payment_from: payment_from,
+            payment_to: payment_to,
+            industry: industryVocabluary[industry],
+          });
+        }}
       >
         <span className={styles.applyBtnText}>Применить</span>
       </button>

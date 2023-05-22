@@ -16,6 +16,9 @@ const FindVacancy = (props) => {
   const [previousOptions, setPreviousOptions] = useState({});
   useEffect(() => {
     const options = OptionsService.getAllOptions();
+    console.log('options', options);
+    setFilterOptions(options);
+    setValue(options.vacancyName);
     setLoading(true);
     VacanciesService.getVacancies(options).then((data) => {
       changeVacancies(data);
@@ -23,13 +26,9 @@ const FindVacancy = (props) => {
     });
   }, []);
 
-  useLayoutEffect(() => {
-    const options = OptionsService.getAllOptions();
-    setFilterOptions(options);
-  }, []);
-
   const handleFilter = (filterInfo) => {
-    OptionsService.setFilterOpntions(filterInfo);
+    console.log('filterInfo =>', filterInfo);
+    OptionsService.setFilterOptions({ ...filterInfo, vacancyName: inputValue });
     setFilterOptions(filterInfo);
     const filteredVacancies = VacanciesService.getVacancies({
       vacancyName: inputValue,
@@ -67,9 +66,16 @@ const FindVacancy = (props) => {
       setTotal(Math.ceil(VacanciesService.total / 4));
     }
   }, [VacanciesService.total]);
+  // console.log('filterOptions beforeRender =:>>>', filterOptions);
   return (
     <div className={styles.container}>
-      <Filter handleFilter={handleFilter} filterOptions={filterOptions} />
+      <Filter
+        handleFilter={handleFilter}
+        industryName={filterOptions?.industryName}
+        payment_from={filterOptions?.payment_from}
+        payment_to={filterOptions?.payment_to}
+        industry={filterOptions?.industry}
+      />
       <div className={styles.innerContainer}>
         <SearchVacancy
           vacancies={vacancies}
@@ -78,6 +84,7 @@ const FindVacancy = (props) => {
           handlePagination={handlePagination}
           setValue={setValue}
           filterOptions={filterOptions}
+          vacancyName={filterOptions?.vacancyName}
         />
         <Paginate
           total={totalPages}

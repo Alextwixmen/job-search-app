@@ -58,7 +58,6 @@ function App() {
         <Route path='favorites' element={<Favorites />} />
         <Route path='/vacancy/:id' element={<SingleVacancy />} />
         <Route path='/notFound' element={<NotFound />} />
-        <Route path='/vacancy/:query' element={<FindVacancy />} />
       </Route>
     </Routes>
   );

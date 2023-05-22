@@ -9,7 +9,6 @@ import OptionsService from '../../services/OptionsService';
 const SearchVacancy = (props) => {
   const [inputValue, changeInputValue] = useState('');
   const onSubmit = () => {
-    console.log(props.filterOptions, inputValue);
     VacanciesService.getVacancies({
       vacancyName: inputValue,
       ...props.filterOptions,
@@ -17,12 +16,19 @@ const SearchVacancy = (props) => {
       props.changeVacancies(data);
     });
   };
+  useEffect(() => {
+    changeInputValue(props.vacancyName);
+  }, []);
+  useEffect(() => {
+    changeInputValue(props.vacancyName);
+  }, [props.vacancyName]);
 
   const handleChahge = (e) => {
     props.setValue(e.target.value);
     changeInputValue(e.target.value);
     OptionsService.setInputValue(e.target.value);
   };
+
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput
