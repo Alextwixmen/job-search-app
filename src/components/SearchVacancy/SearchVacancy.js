@@ -1,4 +1,4 @@
-import SingleVacancy from '../SingleVacancy/SingleVacancy';
+import SingleVacancy from '../Vacancy/Vacancy';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './searchVacancy.module.css';
 import { useEffect, useState } from 'react';

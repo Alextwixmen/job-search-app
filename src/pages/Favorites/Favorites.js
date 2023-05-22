@@ -1,5 +1,5 @@
 import styles from './favorites.module.css';
-import SingleVacancy from '../../components/SingleVacancy/SingleVacancy';
+import SingleVacancy from '../../components/Vacancy/Vacancy';
 import LocalStorageService from '../../services/localStorageService';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';

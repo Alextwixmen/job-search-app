@@ -1,4 +1,4 @@
-import styles from './singleVacancy.module.css';
+import styles from './vacancy.module.css';
 import { Link } from 'react-router-dom';
 import LocalStorageService from '../../services/localStorageService';
 import { ReactComponent as Star } from '../../assets/icons/Save Button.svg';
