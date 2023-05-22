@@ -12,16 +12,19 @@ const SingleVacancy = (props) => {
   const [isFavoriteStar, setFavoriteStar] = useState(null);
   const handleStarClick = (vacancyInfo) => {
     const shortVacancyInfo = {
-      typeOfWork: vacancyInfo.type_of_work.title,
-      vacancyTown: vacancyInfo.town.title,
+      typeOfWork: vacancyInfo.type_of_work?.title || vacancyInfo.typeOfWork,
+      vacancyTown: vacancyInfo.town?.title || vacancyInfo.vacancyTown,
       profession: vacancyInfo.profession,
       payment_from: vacancyInfo.payment_from,
-      key: props.vacancyInfo.id,
+      key: props.vacancyInfo.key || vacancyInfo.id,
       vacancyRichText: vacancyInfo.vacancyRichText,
       payment_to: vacancyInfo.payment_to,
       currency: vacancyInfo.currency,
     };
-    const isFavorite = isVacancyFavorite(vacancyInfo.id);
+    const isFavorite = isVacancyFavorite(
+      vacancyInfo.id || props.vacancyInfo.key
+    );
+
     if (!isFavorite) {
       setFavoriteStar(true);
       divideFavoritesVacancies(shortVacancyInfo);
@@ -30,7 +33,11 @@ const SingleVacancy = (props) => {
       if (!favoriteVacancies) return null;
       for (let arr of favoriteVacancies) {
         for (let vacancy of arr) {
-          if (vacancy.key === vacancyInfo.id) {
+          console.log(vacancy);
+          if (
+            vacancy.key === vacancyInfo.id ||
+            vacancy.key === props.vacancyInfo.key
+          ) {
             refillFavoritesVacancies(vacancy);
             setFavoriteStar(false);
           }
@@ -50,7 +57,7 @@ const SingleVacancy = (props) => {
       : handleStarClick;
 
   const favoriteStar =
-    isVacancyFavorite(props.vacancyInfo.id) || props.favoriteStar
+    isVacancyFavorite(props.vacancyInfo.id) || props.vacancyInfo.key
       ? 'favoriteStarIcon'
       : null;
 

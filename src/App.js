@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Favorites from './pages/Favorites/Favorites';
