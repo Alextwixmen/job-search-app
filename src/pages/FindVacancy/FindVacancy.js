@@ -1,10 +1,9 @@
 import styles from './findVacancy.module.css';
 import Filter from '../../components/Filter/Filter';
 import SearchVacancy from '../../components/SearchVacancy/SearchVacancy';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import { Paginate } from '../../components/Pagination/Paginate';
-import LocalStorageService from '../../services/localStorageService';
 import OptionsService from '../../services/OptionsService';
 const FindVacancy = (props) => {
   const [vacancies, changeVacancies] = useState();
@@ -13,8 +12,6 @@ const FindVacancy = (props) => {
   const [inputValue, setValue] = useState('');
   const [totalPages, setTotal] = useState(0);
   const [activePage, setPage] = useState(1);
-  const [previousOptions, setPreviousOptions] = useState({});
-  const [isAuth, setAuth] = useState(false);
   useEffect(() => {
     const options = OptionsService.getAllOptions();
     setFilterOptions(options);
@@ -28,7 +25,6 @@ const FindVacancy = (props) => {
       } else {
         changeVacancies(data);
         setLoading(false);
-        setAuth(true);
       }
     });
   }, []);

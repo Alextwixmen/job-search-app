@@ -1,3 +1,3 @@
-const compareDate = (date) => new Date((date - 5 * 60) * 1000) === new Date();
+const compareDate = (ttl) => ttl < Date.now() / 1000;
 
 export default compareDate;

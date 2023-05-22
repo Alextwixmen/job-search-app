@@ -1,12 +1,11 @@
 import { Select } from '@mantine/core';
 import styles from './Filter.module.css';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NumberInput } from '@mantine/core';
 import IndustryService from '../../services/industryService';
 import { ReactComponent as CloseIcon } from '../../assets/icons/CloseIcon.svg';
 import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
 import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
-import { ReactComponent as UpBtnNumberInput } from '../../assets/icons/UpBtnNumberInput.svg';
 import OptionsService from '../../services/OptionsService';
 import LocalStorageService from '../../services/localStorageService';
 const Filter = (props) => {

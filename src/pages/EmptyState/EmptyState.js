@@ -1,7 +1,6 @@
 import styles from './emptyState.module.css';
 import { ReactComponent as NotFoundPic } from '../../assets/images/notFoundPicture.svg';
-import { Button } from '@mantine/core';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const EmptyState = () => {
   let navigate = useNavigate();
   const handleClick = () => {

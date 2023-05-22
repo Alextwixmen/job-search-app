@@ -4,7 +4,6 @@ import styles from './searchVacancy.module.css';
 import { useEffect, useState } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
-import LocalStorageService from '../../services/localStorageService';
 import OptionsService from '../../services/OptionsService';
 const SearchVacancy = (props) => {
   const [inputValue, changeInputValue] = useState('');

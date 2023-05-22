@@ -2,9 +2,6 @@ import { Link, Outlet } from 'react-router-dom';
 import styles from './Layout.module.css';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import { useMatch } from 'react-router-dom';
-import { useMatches } from 'react-router-dom';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
