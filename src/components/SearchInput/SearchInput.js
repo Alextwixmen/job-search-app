@@ -1,7 +1,7 @@
 import styles from './searchInput.module.css';
 const SearchInput = (props) => {
   return (
-    <div className={styles.inputGroup}>
+    <form className={styles.inputGroup}>
       <svg
         width='15'
         height='15'
@@ -22,10 +22,14 @@ const SearchInput = (props) => {
         onChange={props.handleChange}
         value={props.value}
       ></input>
-      <button className={styles.btnInputSearch} onClick={props.onSubmit}>
+      <button
+        className={styles.btnInputSearch}
+        onClick={props.onSubmit}
+        defaultValue={true}
+      >
         Поиск
       </button>
-    </div>
+    </form>
   );
 };
 export default SearchInput;

@@ -16,7 +16,6 @@ const FindVacancy = (props) => {
   const [previousOptions, setPreviousOptions] = useState({});
   useEffect(() => {
     const options = OptionsService.getAllOptions();
-    console.log('options', options);
     setFilterOptions(options);
     setValue(options.vacancyName);
     setPage(Number(options.page) ? Number(options.page) : 1);
@@ -28,7 +27,6 @@ const FindVacancy = (props) => {
   }, []);
 
   const handleFilter = (filterInfo) => {
-    console.log('filterInfo =>', filterInfo, 'inpuValue =>>', inputValue);
     OptionsService.setFilterOptions({ ...filterInfo, vacancyName: inputValue });
     OptionsService.setPageNumber(1);
     setFilterOptions(filterInfo);
@@ -87,6 +85,8 @@ const FindVacancy = (props) => {
           setValue={setValue}
           filterOptions={filterOptions}
           vacancyName={filterOptions?.vacancyName}
+          setPage={setPage}
+          setLoading={setLoading}
         />
         <Paginate
           total={totalPages}

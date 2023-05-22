@@ -18,15 +18,14 @@ const Filter = (props) => {
   const [payment_to, setPaymentTo] = useState('');
   const [industryId, setIndustryId] = useState('');
   useEffect(() => {
-    async function fetchData() {
+    (async function () {
       const response = await IndustryService.getIndustries();
       const namesOfIndustries = response.reduce((acc, industry) => {
         industryVocabluary[industry.title] = industry.key;
         return [...acc, industry.title];
       }, []);
       changeIndustries(namesOfIndustries);
-    }
-    fetchData();
+    })();
   }, []);
 
   useEffect(() => {

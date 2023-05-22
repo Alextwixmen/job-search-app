@@ -9,16 +9,17 @@ import OptionsService from '../../services/OptionsService';
 const SearchVacancy = (props) => {
   const [inputValue, changeInputValue] = useState('');
   const onSubmit = () => {
+    props.setLoading(true);
+    props.setPage(1);
     VacanciesService.getVacancies({
-      vacancyName: inputValue,
       ...props.filterOptions,
+      vacancyName: inputValue,
     }).then((data) => {
+      props.setLoading(false);
+
       props.changeVacancies(data);
     });
   };
-  useEffect(() => {
-    changeInputValue(props.vacancyName);
-  }, []);
   useEffect(() => {
     changeInputValue(props.vacancyName);
   }, [props.vacancyName]);
