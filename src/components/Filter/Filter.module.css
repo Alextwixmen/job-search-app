@@ -84,3 +84,11 @@
 .applyButton:active {
   background-color: #3b7cd3;
 }
+@media (max-width: 768px) {
+  .form {
+    width: 100%;
+  }
+  .formHeader {
+    justify-content: space-between;
+  }
+}

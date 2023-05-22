@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
-import styles from './app.module.css';
+import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Favorites from './pages/Favorites/Favorites';
 import FindVacancy from './pages/FindVacancy/FindVacancy';

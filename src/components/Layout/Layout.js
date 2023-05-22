@@ -20,7 +20,7 @@ const Layout = () => {
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
-        <div className={styles.headerContainer}>
+        <div className='container'>
           <nav className={styles.nav}>
             <HeaderLogo />
             <div className={styles.linksContainer}>
@@ -40,8 +40,10 @@ const Layout = () => {
           </nav>
         </div>
       </header>
-      <main className={`${styles.container} ${styles.main}`}>
-        <Outlet />
+      <main>
+        <div className='container'>
+          <Outlet />
+        </div>
       </main>
     </div>
   );

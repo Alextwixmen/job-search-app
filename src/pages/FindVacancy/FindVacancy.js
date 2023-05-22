@@ -75,7 +75,7 @@ const FindVacancy = (props) => {
     }
   }, [VacanciesService.total]);
   return (
-    <div className={styles.container}>
+    <div className={styles.wrapper}>
       <Filter
         handleFilter={handleFilter}
         industryName={filterOptions?.industryName}
