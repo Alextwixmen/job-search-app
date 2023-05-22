@@ -69,6 +69,7 @@ const SingleVacancy = (props) => {
       to={`/vacancy/${vacancyId}`}
       onClick={(e) => handlePrevent(e)}
       state={{ from: props.vacancyInfo }}
+      data-elem={`vacancy-${vacancyId}`}
     >
       <div
         className={`${styles.singlaVacancyContainer} ${
@@ -82,6 +83,7 @@ const SingleVacancy = (props) => {
           <button
             className={styles.favoriteStar}
             onClick={() => handleClick(props.vacancyInfo)}
+            data-elem={`vacancy-${vacancyId}-shortlist-button`}
           >
             <Star className={`${styles.star} ${styles[favoriteStar]}`} />
           </button>

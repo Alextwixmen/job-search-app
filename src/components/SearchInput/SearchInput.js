@@ -17,6 +17,7 @@ const SearchInput = (props) => {
         />
       </svg>
       <input
+        data-elem='search-input'
         className={styles.inputSearch}
         placeholder='Введите название вакансии'
         onChange={props.handleChange}
@@ -26,6 +27,7 @@ const SearchInput = (props) => {
         className={styles.btnInputSearch}
         onClick={props.onSubmit}
         defaultValue={true}
+        data-elem='search-button'
       >
         Поиск
       </button>

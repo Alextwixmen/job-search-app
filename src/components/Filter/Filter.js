@@ -85,6 +85,7 @@ const Filter = (props) => {
         </div>
       </div>
       <Select
+        data-elem='industry-select'
         styles={{
           item: {
             '&[data-selected]': {
@@ -124,6 +125,7 @@ const Filter = (props) => {
       />
 
       <NumberInput
+        data-elem='salary-from-input'
         label='Оклад'
         placeholder='От'
         max={500000}
@@ -136,6 +138,7 @@ const Filter = (props) => {
         styles={numberInputStyles}
       />
       <NumberInput
+        data-elem='salary-to-input'
         placeholder='До'
         max={500000}
         min={0}
@@ -157,6 +160,7 @@ const Filter = (props) => {
             industry: industryVocabluary[industry],
           });
         }}
+        data-elem='search-button'
       >
         <span className={styles.applyBtnText}>Применить</span>
       </button>
