@@ -52,24 +52,28 @@ const Favorites = () => {
 
   return (
     <div className={styles.favoritesContainer}>
-      {vacanciesForPage.map((vacancy) => {
-        return (
-          <SingleVacancy
-            vacancyInfo={vacancy}
-            handleDeleteVacancy={handleDeleteVacancy}
-            favoriteStar={true}
-            key={vacancy.key}
-            vacancyName={'vacancyName'}
-            vacancySalary={'salaryInfo'}
-            typeOfWork={'typeOfWork'}
-            vacancyMainPart={'vacancyMainPart'}
-          />
-        );
-      })}
+      <div className={styles.favotiesVacancies}>
+        {vacanciesForPage.map((vacancy) => {
+          return (
+            <SingleVacancy
+              vacancyInfo={vacancy}
+              handleDeleteVacancy={handleDeleteVacancy}
+              favoriteStar={true}
+              key={vacancy.key}
+              vacancyName={'vacancyName'}
+              vacancySalary={'salaryInfo'}
+              typeOfWork={'typeOfWork'}
+              vacancyMainPart={'vacancyMainPart'}
+            />
+          );
+        })}
+      </div>
+
       <Paginate
         total={Math.ceil(favoriteVacancies.length)}
         handlePagination={handlePagination}
         page={pageNumber}
+        favoritePagination={'favoritePagination'}
       />
     </div>
   );
