@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
-  LocalStorageService.deleteItem('options');
+  localStorage.removeItem('options');
   useEffect(() => {
     localStorage.setItem('favoritesVacancies', JSON.stringify([]));
     OptionsService.resetAllOptions();
@@ -46,7 +46,7 @@ function App() {
         <Route path='/vacancy' element={<FindVacancy />} />
         <Route path='favorites' element={<Favorites />} />
         <Route path='/vacancy/:id' element={<SingleVacancy />} />
-        <Route path='/notFound' element={<EmptyState />} />
+        <Route path='/emptyState' element={<EmptyState />} />
       </Route>
     </Routes>
   );

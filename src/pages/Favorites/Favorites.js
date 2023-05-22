@@ -37,12 +37,8 @@ const Favorites = () => {
       handlePagination(previousPage + 1);
     }
   };
-
-  if (
-    !LocalStorageService.getFavoriteVacancies()?.length ||
-    !localStorage.getItem('favoritesVacancies')
-  ) {
-    return <Navigate to='/notFound' />;
+  if (!LocalStorageService.getFavoriteVacancies()?.length) {
+    return <Navigate to='/emptyState' />;
   }
 
   const handlePagination = (e) => {

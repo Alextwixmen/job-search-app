@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
-  const notFoundRoute = useMatch('/notFound');
+  const notFoundRoute = useMatch('/emptyState');
   let findVacancyStyle = null;
   let favoritesStyle = null;
   if (findVacancyRoute) {
