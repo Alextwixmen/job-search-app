@@ -14,3 +14,8 @@
   gap: 12px;
   padding: 0px;
 }
+@media (max-width: 385px) {
+  .headerLogo {
+    display: none;
+  }
+}

@@ -24,7 +24,7 @@
 .vacancyDescriptionMain {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   padding-bottom: 16.5px;
 }
 .divider {
@@ -92,6 +92,53 @@
   font-weight: 700;
   font-size: 20px;
 }
-.singleVacancy {
-  max-height: 157px;
+
+@media (max-width: 450px) {
+  .singlaVacancyContainer {
+    padding: 14px;
+  }
+  .vacancyName {
+    font-size: 16px;
+  }
+  .salaryInfo,
+  .typeOfWork {
+    font-size: 18px;
+  }
+}
+@media (max-width: 410px) {
+  .salaryInfo,
+  .typeOfWork {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .vacancyDescriptionName {
+    font-size: 24px;
+  }
+  .vacancyDescriptionSalary {
+    font-size: 18px;
+  }
+  .vacancyDesciptionType {
+    font-size: 18px;
+  }
+  .singlaVacancyContainer {
+    padding: 20px;
+  }
+}
+@media (max-width: 500px) {
+  .vacancyDescriptionName {
+    font-size: 20px;
+  }
+}
+@media (max-width: 465px) {
+  .vacancyDescriptionMain,
+  .vacancyMainPart {
+    gap: 6px;
+  }
+}
+@media (max-width: 440px) {
+  .vacancyDescriptionMain {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

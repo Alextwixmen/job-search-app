@@ -1,4 +1,4 @@
-.notFoundContainer {
+.emptyStateContainer {
   margin: 0 auto;
   max-width: 773px;
 }
@@ -38,4 +38,9 @@
 .vacancySearch:hover {
   color: white;
   background-color: #3b7cd3;
+}
+@media (max-width: 375px) {
+  .notFoundText {
+    font-size: 20px;
+  }
 }

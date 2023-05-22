@@ -8,24 +8,29 @@ import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
 import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
 import { ReactComponent as UpBtnNumberInput } from '../../assets/icons/UpBtnNumberInput.svg';
 import OptionsService from '../../services/OptionsService';
+import LocalStorageService from '../../services/localStorageService';
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
   const [industryVocabluary] = useState({});
   const [isOpen, setOpen] = useState(false);
-  const [filterInfo, changeFilterInfo] = useState({});
   const [industry, changeIndustry] = useState('');
   const [payment_from, setPaymentFrom] = useState('');
   const [payment_to, setPaymentTo] = useState('');
   const [industryId, setIndustryId] = useState('');
   useEffect(() => {
-    (async function () {
-      const response = await IndustryService.getIndustries();
-      const namesOfIndustries = response.reduce((acc, industry) => {
-        industryVocabluary[industry.title] = industry.key;
-        return [...acc, industry.title];
-      }, []);
-      changeIndustries(namesOfIndustries);
-    })();
+    if (LocalStorageService.getIndustries()) {
+      changeIndustries(LocalStorageService.getIndustries());
+    } else {
+      (async function () {
+        const response = await IndustryService.getIndustries();
+        const namesOfIndustries = response.reduce((acc, industry) => {
+          industryVocabluary[industry.title] = industry.key;
+          return [...acc, industry.title];
+        }, []);
+        changeIndustries(namesOfIndustries);
+        localStorage.setItem('industries', JSON.stringify(namesOfIndustries));
+      })();
+    }
   }, []);
 
   useEffect(() => {

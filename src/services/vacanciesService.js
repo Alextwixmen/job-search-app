@@ -13,12 +13,6 @@ export default class VacanciesService {
     if (payment_from || payment_to) {
       no_agreement = 1;
     }
-    if (!LocalStorageService.getBearer()) {
-      console.log('токена нет');
-      return null;
-    }
-    console.log('токен есть');
-
     try {
       const isRefresh = dateHelper(
         JSON.parse(localStorage.getItem('bearer'))?.ttl
@@ -49,7 +43,6 @@ export default class VacanciesService {
         }
       );
       const vacancies = await response.json();
-
       this.total = vacancies.total;
       return vacancies.objects;
     } catch (error) {

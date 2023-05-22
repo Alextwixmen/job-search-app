@@ -50,3 +50,14 @@
 .inputGroup:hover {
   outline: 1px solid #5e96fc;
 }
+@media (max-width: 450px) {
+  .btnInputSearch {
+    padding: 3.5px 15px;
+  }
+  .inputGroup {
+    padding: 4px 8px 6px 4px;
+  }
+  .inputSearch {
+    margin-left: 8px;
+  }
+}

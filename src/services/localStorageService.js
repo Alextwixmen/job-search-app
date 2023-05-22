@@ -13,7 +13,11 @@ export default class LocalStorageService {
     );
     return vacancies;
   }
-
+  static getIndustries() {
+    if (localStorage.getItem('industries')) {
+      return JSON.parse(LocalStorageService.getItem('industries'));
+    }
+  }
   static deleteItem(key) {
     localStorage.removeItem(key);
   }

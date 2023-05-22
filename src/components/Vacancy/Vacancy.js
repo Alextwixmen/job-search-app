@@ -57,7 +57,6 @@ const SingleVacancy = (props) => {
   const vacancyId = props.vacancyInfo.id
     ? props.vacancyInfo.id
     : props.vacancyInfo.key;
-  console.log(props.singleVacancy);
   return (
     <Link
       to={`/vacancy/${vacancyId}`}

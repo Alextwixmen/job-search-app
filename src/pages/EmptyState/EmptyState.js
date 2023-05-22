@@ -1,14 +1,14 @@
-import styles from './notFound.module.css';
+import styles from './emptyState.module.css';
 import { ReactComponent as NotFoundPic } from '../../assets/images/notFoundPicture.svg';
 import { Button } from '@mantine/core';
 import { Navigate, useNavigate } from 'react-router-dom';
-const NotFound = () => {
+const EmptyState = () => {
   let navigate = useNavigate();
   const handleClick = () => {
     navigate('/vacancy');
   };
   return (
-    <div className={styles.notFoundContainer}>
+    <div className={styles.emptyStateContainer}>
       <div className={styles.notFoundItems}>
         <NotFoundPic className={styles.notFoundPic} />
         <span className={styles.notFoundText}>Упс, здесь еще ничего нет!</span>
@@ -19,4 +19,4 @@ const NotFound = () => {
     </div>
   );
 };
-export default NotFound;
+export default EmptyState;

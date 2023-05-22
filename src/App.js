@@ -6,7 +6,7 @@ import FindVacancy from './pages/FindVacancy/FindVacancy';
 import Layout from './components/Layout/Layout';
 import AuthService from './services/authService';
 import SingleVacancy from './pages/SingleVacancy/SingleVacancy';
-import NotFound from './pages/NotFound/NotFound';
+import EmptyState from './pages/EmptyState/EmptyState';
 import LocalStorageService from './services/localStorageService';
 import dateHelper from './utils/dateHelper';
 import OptionsService from './services/OptionsService';
@@ -46,7 +46,7 @@ function App() {
         <Route path='/vacancy' element={<FindVacancy />} />
         <Route path='favorites' element={<Favorites />} />
         <Route path='/vacancy/:id' element={<SingleVacancy />} />
-        <Route path='/notFound' element={<NotFound />} />
+        <Route path='/notFound' element={<EmptyState />} />
       </Route>
     </Routes>
   );

@@ -47,3 +47,8 @@
     gap: 0px;
   }
 }
+@media (max-width: 385px) {
+  .linksContainer {
+    justify-content: space-around;
+  }
+}

@@ -9,4 +9,11 @@
 }
 .favotiesVacancies {
   max-height: 596px;
+  min-width: 773px;
+}
+@media (max-width: 830px) {
+  .favotiesVacancies {
+    min-width: min-content;
+    max-height: none;
+  }
 }

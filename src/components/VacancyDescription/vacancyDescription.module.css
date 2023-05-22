@@ -20,3 +20,13 @@ p {
 li {
   list-style-position: inside;
 }
+@media (max-width: 560px) {
+  .vacancyDescriptionContainer {
+    padding: 17px;
+  }
+}
+@media (max-width: 385px) {
+  .vacancyDescriptionContainer {
+    padding: 11px;
+  }
+}

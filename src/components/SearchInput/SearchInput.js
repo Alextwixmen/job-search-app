@@ -20,7 +20,7 @@ const SearchInput = (props) => {
         className={styles.inputSearch}
         placeholder='Введите название вакансии'
         onChange={props.handleChange}
-        value={props.value}
+        value={props.value ? props.value : ''}
       ></input>
       <button
         className={styles.btnInputSearch}
