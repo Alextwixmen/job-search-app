@@ -57,14 +57,18 @@ const SingleVacancy = (props) => {
   const vacancyId = props.vacancyInfo.id
     ? props.vacancyInfo.id
     : props.vacancyInfo.key;
-
+  console.log(props.singleVacancy);
   return (
     <Link
       to={`/vacancy/${vacancyId}`}
       onClick={(e) => handlePrevent(e)}
       state={{ from: props.vacancyInfo }}
     >
-      <div className={styles.singlaVacancyContainer}>
+      <div
+        className={`${styles.singlaVacancyContainer} ${
+          styles[props.singleVacancy]
+        }`}
+      >
         <div className={styles.vacancyHeader}>
           <div className={styles[props.vacancyName]}>
             {props.vacancyInfo.profession && props.vacancyInfo.profession}

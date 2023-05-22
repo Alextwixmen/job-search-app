@@ -1,5 +1,5 @@
 import styles from './favorites.module.css';
-import SingleVacancy from '../../components/Vacancy/Vacancy';
+import Vacancy from '../../components/Vacancy/Vacancy';
 import LocalStorageService from '../../services/localStorageService';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -55,7 +55,7 @@ const Favorites = () => {
       <div className={styles.favotiesVacancies}>
         {vacanciesForPage.map((vacancy) => {
           return (
-            <SingleVacancy
+            <Vacancy
               vacancyInfo={vacancy}
               handleDeleteVacancy={handleDeleteVacancy}
               favoriteStar={true}

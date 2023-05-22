@@ -14,6 +14,7 @@ export const SingleVacancy = (props) => {
         vacancySalary={'vacancyDescriptionSalary'}
         typeOfWork={'vacancyDesciptionType'}
         vacancyMainPart={'vacancyDescriptionMain'}
+        singleVacancy={'singleVacancy'}
       />
       <VacancyDescription vacancyInfo={from} />
     </div>
