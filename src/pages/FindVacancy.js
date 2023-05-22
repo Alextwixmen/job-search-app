@@ -19,6 +19,7 @@ const FindVacancy = (props) => {
     console.log('options', options);
     setFilterOptions(options);
     setValue(options.vacancyName);
+    setPage(Number(options.page) ? Number(options.page) : 1);
     setLoading(true);
     VacanciesService.getVacancies(options).then((data) => {
       changeVacancies(data);
@@ -27,8 +28,9 @@ const FindVacancy = (props) => {
   }, []);
 
   const handleFilter = (filterInfo) => {
-    console.log('filterInfo =>', filterInfo);
+    console.log('filterInfo =>', filterInfo, 'inpuValue =>>', inputValue);
     OptionsService.setFilterOptions({ ...filterInfo, vacancyName: inputValue });
+    OptionsService.setPageNumber(1);
     setFilterOptions(filterInfo);
     const filteredVacancies = VacanciesService.getVacancies({
       vacancyName: inputValue,
@@ -36,6 +38,7 @@ const FindVacancy = (props) => {
       page: 1,
     });
     setLoading(true);
+    setPage(1);
     filteredVacancies.then((vacancy) => {
       changeVacancies(vacancy);
       setLoading(false);
@@ -66,7 +69,6 @@ const FindVacancy = (props) => {
       setTotal(Math.ceil(VacanciesService.total / 4));
     }
   }, [VacanciesService.total]);
-  // console.log('filterOptions beforeRender =:>>>', filterOptions);
   return (
     <div className={styles.container}>
       <Filter
@@ -89,10 +91,7 @@ const FindVacancy = (props) => {
         <Paginate
           total={totalPages}
           handlePagination={handlePagination}
-          page={
-            JSON.parse(LocalStorageService.getItem('options'))?.page ||
-            activePage
-          }
+          page={activePage}
           setPage={setPage}
         />
       </div>

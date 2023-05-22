@@ -4,7 +4,7 @@ import AuthService from './authService';
 export default class VacanciesService {
   static total = null;
   static getVacancies = async (options) => {
-    const page = options?.page || 0;
+    const page = options?.page || '';
     const keyWord = options?.vacancyName || '';
     const industry = options?.industry || '';
     const payment_from = options?.payment_from || '';
@@ -29,7 +29,9 @@ export default class VacanciesService {
       );
 
       const response = await fetch(
-        `https://startup-summer-proxy-production.up.railway.app/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1&published=1`,
+        `https://startup-summer-proxy-production.up.railway.app/2.0/vacancies/?count=4&page=${
+          page - 1
+        }&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=1&published=1`,
         {
           headers: {
             Host: 'api.superjob.ru',

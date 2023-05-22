@@ -13,10 +13,10 @@ class OptionsService {
     localStorage.removeItem('inputValue');
   }
   static setPageNumber(pageNumber) {
-    localStorage.setItem('pageNumber', pageNumber);
+    localStorage.setItem('page', pageNumber);
   }
   static resetPageNumber() {
-    localStorage.removeItem('pageNumber');
+    localStorage.removeItem('page');
   }
   static resetAllOptions() {
     OptionsService.resetFilterOpntions();
@@ -26,7 +26,7 @@ class OptionsService {
   static getAllOptions() {
     return {
       ...JSON.parse(localStorage.getItem('filterOptions')),
-      // pageNumber: localStorage.getItem('pageNumber'),
+      page: localStorage.getItem('page'),
       vacancyName: localStorage.getItem('inputValue'),
     };
   }
