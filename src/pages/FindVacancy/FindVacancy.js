@@ -1,11 +1,11 @@
-import styles from './pages.module.css';
-import Filter from '../components/Filter/Filter';
-import SearchVacancy from '../components/SearchVacancy/SearchVacancy';
+import styles from './findVacancy.module.css';
+import Filter from '../../components/Filter/Filter';
+import SearchVacancy from '../../components/SearchVacancy/SearchVacancy';
 import { useState, useEffect, useLayoutEffect } from 'react';
-import VacanciesService from '../services/vacanciesService';
-import { Paginate } from '../components/Pagination/Paginate';
-import LocalStorageService from '../services/localStorageService';
-import OptionsService from '../services/OptionsService';
+import VacanciesService from '../../services/vacanciesService';
+import { Paginate } from '../../components/Pagination/Paginate';
+import LocalStorageService from '../../services/localStorageService';
+import OptionsService from '../../services/OptionsService';
 const FindVacancy = (props) => {
   const [vacancies, changeVacancies] = useState();
   const [isLoading, setLoading] = useState(true);
@@ -14,15 +14,22 @@ const FindVacancy = (props) => {
   const [totalPages, setTotal] = useState(0);
   const [activePage, setPage] = useState(1);
   const [previousOptions, setPreviousOptions] = useState({});
+  const [isAuth, setAuth] = useState(false);
   useEffect(() => {
     const options = OptionsService.getAllOptions();
     setFilterOptions(options);
     setValue(options.vacancyName);
     setPage(Number(options.page) ? Number(options.page) : 1);
     setLoading(true);
+
     VacanciesService.getVacancies(options).then((data) => {
-      changeVacancies(data);
-      setLoading(false);
+      if (data === null) {
+        console.log('data =>>', data);
+      } else {
+        changeVacancies(data);
+        setLoading(false);
+        setAuth(true);
+      }
     });
   }, []);
 

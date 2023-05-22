@@ -1,5 +1,5 @@
-import styles from './pages.module.css';
-import { ReactComponent as NotFoundPic } from '../assets/images/notFoundPicture.svg';
+import styles from './notFound.module.css';
+import { ReactComponent as NotFoundPic } from '../../assets/images/notFoundPicture.svg';
 import { Button } from '@mantine/core';
 import { Navigate, useNavigate } from 'react-router-dom';
 const NotFound = () => {

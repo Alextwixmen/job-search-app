@@ -13,6 +13,12 @@ export default class VacanciesService {
     if (payment_from || payment_to) {
       no_agreement = 1;
     }
+    if (!LocalStorageService.getBearer()) {
+      console.log('токена нет');
+      return null;
+    }
+    console.log('токен есть');
+
     try {
       const isRefresh = dateHelper(
         JSON.parse(localStorage.getItem('bearer'))?.ttl
@@ -24,10 +30,6 @@ export default class VacanciesService {
         const tokenData = await AuthService.refreshToken(access_token);
         LocalStorageService.setBearer(JSON.stringify(tokenData));
       }
-      console.log(
-        `https://startup-summer-proxy-production.up.railway.app/2.0/vacancies/?count=4&page=${page}&keyword=${keyWord}&catalogues=${industry}&payment_from=${payment_from}&payment_to=${payment_to}&no_agreement=${no_agreement}&published=1`
-      );
-
       const response = await fetch(
         `https://startup-summer-proxy-production.up.railway.app/2.0/vacancies/?count=4&page=${
           page - 1
@@ -41,7 +43,7 @@ export default class VacanciesService {
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
             'Access-Control-Allow-Origin': '*',
             Authorization: `Bearer ${
-              JSON.parse(LocalStorageService.getItem('bearer')).access_token
+              LocalStorageService.getBearer().access_token
             }`,
           },
         }

@@ -1,10 +1,10 @@
-import styles from './pages.module.css';
-import SingleVacancy from '../components/SingleVacancy/SingleVacancy';
-import LocalStorageService from '../services/localStorageService';
+import styles from './favorites.module.css';
+import SingleVacancy from '../../components/SingleVacancy/SingleVacancy';
+import LocalStorageService from '../../services/localStorageService';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Paginate } from '../components/Pagination/Paginate';
-import refillFavoritesVacancies from '../utils/refillFavoritesVacancies';
+import { Paginate } from '../../components/Pagination/Paginate';
+import refillFavoritesVacancies from '../../utils/refillFavoritesVacancies';
 const Favorites = () => {
   const [favoriteVacancies, changeFavoriteVacancies] = useState(
     LocalStorageService.getFavoriteVacancies()

@@ -21,4 +21,9 @@ export default class LocalStorageService {
   static setBearer(bearer) {
     localStorage.setItem('bearer', bearer);
   }
+  static getBearer() {
+    if (localStorage.getItem('bearer')) {
+      return JSON.parse(localStorage.getItem('bearer'));
+    }
+  }
 }

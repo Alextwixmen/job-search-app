@@ -14,11 +14,13 @@ const SearchVacancy = (props) => {
     VacanciesService.getVacancies({
       ...props.filterOptions,
       vacancyName: inputValue,
-    }).then((data) => {
-      props.setLoading(false);
+    })
+      .then((data) => {
+        props.setLoading(false);
 
-      props.changeVacancies(data);
-    });
+        props.changeVacancies(data);
+      })
+      .catch((error) => console.log(error));
   };
   useEffect(() => {
     changeInputValue(props.vacancyName);

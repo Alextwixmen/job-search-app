@@ -1,0 +1,41 @@
+.notFoundContainer {
+  margin: 0 auto;
+  max-width: 773px;
+}
+.notFoundItems {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.notFoundText {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #343a40;
+  margin-bottom: 34px;
+}
+.notFoundPic {
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+.vacancySearch {
+  padding: 10px 24px;
+  border: none;
+  outline: none;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  color: #3b7cd3;
+  background-color: #deecff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.vacancySearch:hover {
+  color: white;
+  background-color: #3b7cd3;
+}

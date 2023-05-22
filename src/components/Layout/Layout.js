@@ -9,9 +9,6 @@ const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
   const notFoundRoute = useMatch('/notFound');
-  const location = useLocation();
-
-  const navigate = useNavigate();
   let findVacancyStyle = null;
   let favoritesStyle = null;
   if (findVacancyRoute) {
@@ -19,11 +16,6 @@ const Layout = () => {
   } else if (favoritesRoute || notFoundRoute) {
     favoritesStyle = 'activeLink';
   }
-  useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('/vacancy');
-    }
-  }, []);
 
   return (
     <div className={styles.wrapper}>
