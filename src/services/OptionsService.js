@@ -2,26 +2,7 @@ class OptionsService {
   static setFilterOptions(options) {
     localStorage.setItem('filterOptions', JSON.stringify({ ...options }));
   }
-  static getIndustryName() {
-    return JSON.parse(localStorage.getItem('filterOptions'))?.industryName;
-  }
-  static getPayment_from() {
-    return JSON.parse(localStorage.getItem('filterOptions'))?.payment_from;
-  }
-  static getPayment_to() {
-    return JSON.parse(localStorage.getItem('filterOptions'))?.payment_to;
-  }
-  static getIndustryId() {
-    return JSON.parse(localStorage.getItem('filterOptions'))?.industry;
-  }
-  static getFilterOptions() {
-    return {
-      industry: OptionsService.getIndustryId(),
-      industryName: OptionsService.getIndustryName(),
-      payment_from: OptionsService.getPayment_from(),
-      payment_to: OptionsService.getPayment_to(),
-    };
-  }
+
   static resetFilterOpntions() {
     localStorage.removeItem('filterOptions');
   }
