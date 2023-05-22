@@ -5,6 +5,7 @@
   border-radius: 12px;
   cursor: pointer;
   margin-bottom: 16px;
+  max-height: 137px;
 }
 .vacancyName {
   color: #5e96fc;
@@ -14,6 +15,9 @@
   font-size: 20px;
   line-height: 24px;
   padding-bottom: 12.5px;
+  max-width: 687px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .vacancyMainPart {
   display: flex;
