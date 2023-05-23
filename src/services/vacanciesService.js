@@ -1,6 +1,7 @@
 import LocalStorageService from './localStorageService';
 import dateHelper from '../utils/dateHelper';
 import AuthService from './authService';
+
 export default class VacanciesService {
   static total = null;
   static getVacancies = async (options) => {

@@ -5,13 +5,14 @@ import { useState, useEffect } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import { Paginate } from '../../components/Pagination/Paginate';
 import OptionsService from '../../services/OptionsService';
-const FindVacancy = (props) => {
+const FindVacancy = () => {
   const [vacancies, changeVacancies] = useState();
   const [isLoading, setLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState();
   const [inputValue, setValue] = useState('');
   const [totalPages, setTotal] = useState(0);
   const [activePage, setPage] = useState(1);
+
   useEffect(() => {
     const options = OptionsService.getAllOptions();
     setFilterOptions(options);

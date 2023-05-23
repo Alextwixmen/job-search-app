@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import VacanciesService from '../../services/vacanciesService';
 import Loader from '../Loader/Loader';
 import OptionsService from '../../services/OptionsService';
+
 const SearchVacancy = (props) => {
   const [inputValue, changeInputValue] = useState('');
+
   const onSubmit = () => {
     props.setLoading(true);
     props.setPage(1);
@@ -18,6 +20,7 @@ const SearchVacancy = (props) => {
       props.changeVacancies(data);
     });
   };
+
   useEffect(() => {
     changeInputValue(props.vacancyName);
   }, []);
@@ -27,6 +30,7 @@ const SearchVacancy = (props) => {
     changeInputValue(e.target.value);
     OptionsService.setInputValue(e.target.value);
   };
+
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput

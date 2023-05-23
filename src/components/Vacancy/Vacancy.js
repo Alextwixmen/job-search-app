@@ -8,8 +8,10 @@ import { useState } from 'react';
 import divideFavoritesVacancies from '../../utils/divideFavoritesVacancies';
 import isVacancyFavorite from '../../utils/isVacansyFavorite';
 import refillFavoritesVacancies from '../../utils/refillFavoritesVacancies';
+
 const SingleVacancy = (props) => {
   const [isFavoriteStar, setFavoriteStar] = useState(null);
+
   const handleStarClick = (vacancyInfo) => {
     const shortVacancyInfo = {
       typeOfWork: vacancyInfo.type_of_work?.title || vacancyInfo.typeOfWork,
@@ -21,6 +23,7 @@ const SingleVacancy = (props) => {
       payment_to: vacancyInfo.payment_to,
       currency: vacancyInfo.currency,
     };
+
     const isFavorite = isVacancyFavorite(
       vacancyInfo.id || props.vacancyInfo.key
     );
@@ -31,6 +34,7 @@ const SingleVacancy = (props) => {
     } else {
       const favoriteVacancies = LocalStorageService.getFavoriteVacancies();
       if (!favoriteVacancies) return null;
+
       for (let arr of favoriteVacancies) {
         for (let vacancy of arr) {
           if (
@@ -50,6 +54,7 @@ const SingleVacancy = (props) => {
       e.preventDefault();
     }
   };
+
   const handleClick =
     props.handleDeleteVacancy !== undefined
       ? props.handleDeleteVacancy
@@ -63,6 +68,7 @@ const SingleVacancy = (props) => {
   const vacancyId = props.vacancyInfo.id
     ? props.vacancyInfo.id
     : props.vacancyInfo.key;
+
   return (
     <Link
       to={`/vacancy/${vacancyId}`}

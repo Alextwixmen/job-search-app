@@ -8,28 +8,41 @@ import { ReactComponent as DownBtn } from '../../assets/icons/DownBtn.svg';
 import { ReactComponent as UpBtn } from '../../assets/icons/UpBtn.svg';
 import OptionsService from '../../services/OptionsService';
 import LocalStorageService from '../../services/localStorageService';
+
 const Filter = (props) => {
   const [industries, changeIndustries] = useState([]);
-  const [industryVocabluary] = useState({});
+  const [industryVocabluary, changeVocabluary] = useState({});
   const [isOpen, setOpen] = useState(false);
   const [industry, changeIndustry] = useState('');
   const [payment_from, setPaymentFrom] = useState('');
   const [payment_to, setPaymentTo] = useState('');
   const [industryId, setIndustryId] = useState('');
+
   useEffect(() => {
-    // if (LocalStorageService.getIndustries()) {
-    //   changeIndustries(LocalStorageService.getIndustries());
-    // } else {
-    (async function () {
-      const response = await IndustryService.getIndustries();
-      const namesOfIndustries = response.reduce((acc, industry) => {
-        industryVocabluary[industry.title] = industry.key;
-        return [...acc, industry.title];
-      }, []);
-      changeIndustries(namesOfIndustries);
-      localStorage.setItem('industries', JSON.stringify(namesOfIndustries));
-    })();
-    // }
+    if (
+      LocalStorageService.getNameOfIndustries() &&
+      LocalStorageService.getIndustryVocabluary()
+    ) {
+      changeIndustries(LocalStorageService.getNameOfIndustries());
+      changeVocabluary(LocalStorageService.getIndustryVocabluary());
+    } else {
+      (async function () {
+        const response = await IndustryService.getIndustries();
+        const namesOfIndustries = response.reduce((acc, industry) => {
+          industryVocabluary[industry.title] = industry.key;
+          return [...acc, industry.title];
+        }, []);
+        changeIndustries(namesOfIndustries);
+        localStorage.setItem(
+          'namesOfIndustries',
+          JSON.stringify(namesOfIndustries)
+        );
+        localStorage.setItem(
+          'industryVocabluary',
+          JSON.stringify(industryVocabluary)
+        );
+      })();
+    }
   }, []);
 
   useEffect(() => {
@@ -72,6 +85,7 @@ const Filter = (props) => {
       padding: '11px 12px 11px 12px',
     },
   };
+
   return (
     <form className={styles.form}>
       <div className={styles.formHeader}>

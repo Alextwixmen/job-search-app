@@ -1,4 +1,5 @@
 import styles from './vacancyDescription.module.css';
+
 function createMarkup(htmlText) {
   return { __html: htmlText };
 }

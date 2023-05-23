@@ -1,4 +1,5 @@
 import styles from './searchInput.module.css';
+
 const SearchInput = (props) => {
   return (
     <form className={styles.inputGroup}>

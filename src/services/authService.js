@@ -1,4 +1,5 @@
 import LocalStorageService from './localStorageService';
+
 export default class AuthService {
   static auth = async () => {
     try {

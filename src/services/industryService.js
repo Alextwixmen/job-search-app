@@ -1,5 +1,5 @@
 export default class IndustryService {
-  static getIndustries = async (value) => {
+  static getIndustries = async () => {
     try {
       const response = await fetch(
         `https://startup-summer-proxy-production.up.railway.app/2.0/catalogues/`,

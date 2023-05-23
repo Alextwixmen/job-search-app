@@ -9,12 +9,16 @@ export default class LocalStorageService {
     }
   }
 
-  static getIndustries() {
-    if (localStorage.getItem('industries')) {
-      return JSON.parse(LocalStorageService.getItem('industries'));
+  static getIndustryVocabluary() {
+    if (localStorage.getItem('industryVocabluary')) {
+      return JSON.parse(LocalStorageService.getItem('industryVocabluary'));
     }
   }
-
+  static getNameOfIndustries() {
+    if (localStorage.getItem('namesOfIndustries')) {
+      return JSON.parse(LocalStorageService.getItem('namesOfIndustries'));
+    }
+  }
   static setBearer(bearer) {
     localStorage.setItem('bearer', bearer);
   }

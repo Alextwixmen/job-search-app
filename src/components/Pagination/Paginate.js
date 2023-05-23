@@ -1,8 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import ReactPaginate from 'react-paginate';
+import React from 'react';
 import { Pagination } from '@mantine/core';
-import { MediaQuery } from '@mantine/core';
 import styles from './Pagination.module.css';
+
 export const Paginate = (props) => {
   return (
     <div

@@ -1,11 +1,14 @@
 import styles from './emptyState.module.css';
 import { ReactComponent as NotFoundPic } from '../../assets/images/notFoundPicture.svg';
 import { useNavigate } from 'react-router-dom';
+
 const EmptyState = () => {
   let navigate = useNavigate();
+
   const handleClick = () => {
     navigate('/vacancy');
   };
+
   return (
     <div className={styles.emptyStateContainer}>
       <div className={styles.notFoundItems}>

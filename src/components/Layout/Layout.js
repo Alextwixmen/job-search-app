@@ -2,12 +2,15 @@ import { Link, Outlet } from 'react-router-dom';
 import styles from './Layout.module.css';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import { useMatch } from 'react-router-dom';
+
 const Layout = () => {
   const findVacancyRoute = useMatch('/vacancy');
   const favoritesRoute = useMatch('/favorites');
   const notFoundRoute = useMatch('/emptyState');
+
   let findVacancyStyle = null;
   let favoritesStyle = null;
+
   if (findVacancyRoute) {
     findVacancyStyle = 'activeLink';
   } else if (favoritesRoute || notFoundRoute) {

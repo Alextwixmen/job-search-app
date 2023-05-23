@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Paginate } from '../../components/Pagination/Paginate';
 import refillFavoritesVacancies from '../../utils/refillFavoritesVacancies';
+
 const Favorites = () => {
   const [favoriteVacancies, changeFavoriteVacancies] = useState(
     LocalStorageService.getFavoriteVacancies()
   );
   const [pageNumber, setPageNumber] = useState(1);
-
   const [vacanciesForPage, setVacanciesForPage] = useState(
     () => LocalStorageService.getFavoriteVacancies()[pageNumber - 1]
   );
@@ -23,7 +23,9 @@ const Favorites = () => {
         }
       }
     }
+
     changeFavoriteVacancies(LocalStorageService.getFavoriteVacancies());
+
     if (vacanciesForPage.length != 1) {
       setVacanciesForPage(
         LocalStorageService.getFavoriteVacancies()[pageNumber - 1]

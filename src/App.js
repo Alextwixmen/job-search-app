@@ -11,15 +11,16 @@ import LocalStorageService from './services/localStorageService';
 import dateHelper from './utils/dateHelper';
 import OptionsService from './services/OptionsService';
 import { useNavigate } from 'react-router-dom';
-// AuthService.auth().then((data) => console.log(data));
 
 function App() {
   const navigate = useNavigate();
   localStorage.removeItem('options');
+
   useEffect(() => {
     localStorage.setItem('favoritesVacancies', JSON.stringify([]));
     OptionsService.resetAllOptions();
   }, []);
+
   useEffect(() => {
     if (!localStorage.getItem('bearer')) {
       AuthService.auth().then((data) => {
@@ -40,6 +41,7 @@ function App() {
       }
     }
   }, []);
+
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
