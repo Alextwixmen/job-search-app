@@ -17,19 +17,19 @@ const Filter = (props) => {
   const [payment_to, setPaymentTo] = useState('');
   const [industryId, setIndustryId] = useState('');
   useEffect(() => {
-    if (LocalStorageService.getIndustries()) {
-      changeIndustries(LocalStorageService.getIndustries());
-    } else {
-      (async function () {
-        const response = await IndustryService.getIndustries();
-        const namesOfIndustries = response.reduce((acc, industry) => {
-          industryVocabluary[industry.title] = industry.key;
-          return [...acc, industry.title];
-        }, []);
-        changeIndustries(namesOfIndustries);
-        localStorage.setItem('industries', JSON.stringify(namesOfIndustries));
-      })();
-    }
+    // if (LocalStorageService.getIndustries()) {
+    //   changeIndustries(LocalStorageService.getIndustries());
+    // } else {
+    (async function () {
+      const response = await IndustryService.getIndustries();
+      const namesOfIndustries = response.reduce((acc, industry) => {
+        industryVocabluary[industry.title] = industry.key;
+        return [...acc, industry.title];
+      }, []);
+      changeIndustries(namesOfIndustries);
+      localStorage.setItem('industries', JSON.stringify(namesOfIndustries));
+    })();
+    // }
   }, []);
 
   useEffect(() => {
