@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/job-search-app/static/css/main.461f4a12.css",
-    "main.js": "/job-search-app/static/js/main.09b79a74.js",
+    "main.js": "/job-search-app/static/js/main.706e65ea.js",
     "static/media/notFoundPicture.svg": "/job-search-app/static/media/notFoundPicture.e971983585ef9132b066d5ec6b8321e4.svg",
     "index.html": "/job-search-app/index.html",
     "static/media/Save Button.svg": "/job-search-app/static/media/Save Button.7e4ac9a18d74ff53960314fc919ca3ce.svg",
@@ -9,14 +9,13 @@
     "static/media/HeaderLogo.svg": "/job-search-app/static/media/HeaderLogo.7e07a45d78062ef26fb8e6481d8c6e0c.svg",
     "static/media/dot.svg": "/job-search-app/static/media/dot.9753793324c982d49ef0f0ed0b017b8f.svg",
     "static/media/CloseIcon.svg": "/job-search-app/static/media/CloseIcon.63977825dcdcfe3b2510577dccc0b9b6.svg",
-    "static/media/UpBtnNumberInput.svg": "/job-search-app/static/media/UpBtnNumberInput.060dfb2e227e0afd7fde9bc6b3a8f19a.svg",
     "static/media/DownBtn.svg": "/job-search-app/static/media/DownBtn.0a65a3fce9c6155adeb8289271261026.svg",
     "static/media/UpBtn.svg": "/job-search-app/static/media/UpBtn.0fbdfe4873888804216a78a80f3f0148.svg",
     "main.461f4a12.css.map": "/job-search-app/static/css/main.461f4a12.css.map",
-    "main.09b79a74.js.map": "/job-search-app/static/js/main.09b79a74.js.map"
+    "main.706e65ea.js.map": "/job-search-app/static/js/main.706e65ea.js.map"
   },
   "entrypoints": [
     "static/css/main.461f4a12.css",
-    "static/js/main.09b79a74.js"
+    "static/js/main.706e65ea.js"
   ]
 }
