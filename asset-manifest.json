@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/job-search-app/static/css/main.461f4a12.css",
+    "main.css": "/job-search-app/static/css/main.7c6f28f1.css",
     "main.js": "/job-search-app/static/js/main.a7056415.js",
     "static/media/notFoundPicture.svg": "/job-search-app/static/media/notFoundPicture.e971983585ef9132b066d5ec6b8321e4.svg",
     "index.html": "/job-search-app/index.html",
@@ -11,11 +11,11 @@
     "static/media/CloseIcon.svg": "/job-search-app/static/media/CloseIcon.63977825dcdcfe3b2510577dccc0b9b6.svg",
     "static/media/DownBtn.svg": "/job-search-app/static/media/DownBtn.0a65a3fce9c6155adeb8289271261026.svg",
     "static/media/UpBtn.svg": "/job-search-app/static/media/UpBtn.0fbdfe4873888804216a78a80f3f0148.svg",
-    "main.461f4a12.css.map": "/job-search-app/static/css/main.461f4a12.css.map",
+    "main.7c6f28f1.css.map": "/job-search-app/static/css/main.7c6f28f1.css.map",
     "main.a7056415.js.map": "/job-search-app/static/js/main.a7056415.js.map"
   },
   "entrypoints": [
-    "static/css/main.461f4a12.css",
+    "static/css/main.7c6f28f1.css",
     "static/js/main.a7056415.js"
   ]
 }
