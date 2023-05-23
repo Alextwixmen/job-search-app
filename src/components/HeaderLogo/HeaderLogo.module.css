@@ -15,7 +15,7 @@
   padding: 0px;
 }
 @media (max-width: 385px) {
-  .headerLogo {
+  .logoText {
     display: none;
   }
 }
