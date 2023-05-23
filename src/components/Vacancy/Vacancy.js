@@ -33,7 +33,6 @@ const SingleVacancy = (props) => {
       if (!favoriteVacancies) return null;
       for (let arr of favoriteVacancies) {
         for (let vacancy of arr) {
-          console.log(vacancy);
           if (
             vacancy.key === vacancyInfo.id ||
             vacancy.key === props.vacancyInfo.key

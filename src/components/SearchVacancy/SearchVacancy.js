@@ -12,7 +12,7 @@ const SearchVacancy = (props) => {
     props.setPage(1);
     VacanciesService.getVacancies({
       ...props.filterOptions,
-      vacancyName: inputValue,
+      vacancyName: props.vacancyName,
     }).then((data) => {
       props.setLoading(false);
       props.changeVacancies(data);
@@ -20,20 +20,19 @@ const SearchVacancy = (props) => {
   };
   useEffect(() => {
     changeInputValue(props.vacancyName);
-  }, [props.vacancyName]);
+  }, []);
 
   const handleChahge = (e) => {
     props.setValue(e.target.value);
     changeInputValue(e.target.value);
     OptionsService.setInputValue(e.target.value);
   };
-
   return props.isLoading ? (
     <div className={styles.spinnerContainer}>
       <SearchInput
         handleChange={handleChahge}
-        value={inputValue}
         onSubmit={onSubmit}
+        value={props.vacancyName}
       />
       <Loader />
     </div>
@@ -41,9 +40,8 @@ const SearchVacancy = (props) => {
     <div className={styles.searchVacancyContainer}>
       <SearchInput
         handleChange={handleChahge}
-        value={inputValue}
         onSubmit={onSubmit}
-        inputValue={props.filterOptions}
+        value={props.vacancyName}
       />
       <div className={styles.singleVacancyContainer}>
         {props.vacancies.map((elem) => {

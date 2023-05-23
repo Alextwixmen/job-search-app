@@ -25,6 +25,8 @@ const FindVacancy = (props) => {
   }, []);
 
   const handleFilter = (filterInfo) => {
+    const options = OptionsService.getAllOptions();
+    setValue(options.vacancyName);
     OptionsService.setFilterOptions({ ...filterInfo, vacancyName: inputValue });
     OptionsService.setPageNumber(1);
     setFilterOptions(filterInfo);
@@ -65,6 +67,7 @@ const FindVacancy = (props) => {
       setTotal(Math.ceil(VacanciesService.total / 4));
     }
   }, [VacanciesService.total]);
+
   return (
     <div className={styles.wrapper}>
       <Filter
@@ -82,7 +85,7 @@ const FindVacancy = (props) => {
           handlePagination={handlePagination}
           setValue={setValue}
           filterOptions={filterOptions}
-          vacancyName={filterOptions?.vacancyName}
+          vacancyName={inputValue}
           setPage={setPage}
           setLoading={setLoading}
         />

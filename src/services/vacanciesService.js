@@ -4,7 +4,7 @@ import AuthService from './authService';
 export default class VacanciesService {
   static total = null;
   static getVacancies = async (options) => {
-    const page = options?.page || '';
+    const page = !Boolean(options?.page) ? 1 : options?.page;
     const keyWord = options?.vacancyName || '';
     const industry = options?.industry || '';
     const payment_from = options?.payment_from || '';
